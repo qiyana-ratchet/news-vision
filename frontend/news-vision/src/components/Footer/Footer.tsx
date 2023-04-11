@@ -20,7 +20,7 @@ const Footer = () => {
         <a href="/">AdChoices / Sponsor Us</a>
       </FooterLinks>
       <div>
-        <span>Copyright © 2023 NewsVision.</span>
+        <span>Copyright © 2023 NewsVision. </span>
         <span>
       NewsVision is not responsible for the content of external sites. Read
       about our approach to external linking.
