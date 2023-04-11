@@ -1,53 +1,66 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { MainWrapper, SectionWrapper, BannerWrapper, BannerButton, NewsWrapper, NewsItem, NewsThumbnail, NewsTitle, TopStoriesWrapper, TopStoriesItem } from './styles';
+import {
+  MainWrapper,
+  SectionWrapper,
+  BannerWrapper,
+  LeftHalf,
+  RightHalf,
+  BigButton,
+  GridButton,
+  NewsWrapper,
+  NewsItem,
+  NewsThumbnail,
+  NewsTitle,
+  TopStoriesWrapper,
+  TopStoriesItem,
+  GridImg,
+  SectionTitle
+} from './styles';
+import vNews1 from '../../assets/images/image39.png';
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  function myFunction() {
+    navigate('/article');
+    // alert("clicked");
+  }
+
+
   return (
     <>
-      <Header />
+      <Header/>
       <MainWrapper>
         <SectionWrapper>
-          <h2>Today's Virtual News</h2>
+          <SectionTitle>Today's Virtual News</SectionTitle>
           <BannerWrapper>
-            <BannerButton>Button 1</BannerButton>
-            <div>
-              <BannerButton>Button 2</BannerButton>
-              <div>
-                <BannerButton>Button 3</BannerButton>
-                <BannerButton>Button 4</BannerButton>
-                <BannerButton>Button 5</BannerButton>
-                <BannerButton>Button 6</BannerButton>
-              </div>
-            </div>
+            <LeftHalf>
+              <BigButton onClick={myFunction}><GridImg src={vNews1} alt="news image"/></BigButton>
+            </LeftHalf>
+            <RightHalf>
+              <GridButton onClick={myFunction}><GridImg src={vNews1} alt="news image"/></GridButton>
+              <GridButton onClick={myFunction}><GridImg src={vNews1} alt="news image"/></GridButton>
+              <GridButton onClick={myFunction}><GridImg src={vNews1} alt="news image"/></GridButton>
+              <GridButton onClick={myFunction}><GridImg src={vNews1} alt="news image"/></GridButton>
+            </RightHalf>
           </BannerWrapper>
         </SectionWrapper>
         <SectionWrapper>
-          <h2>News</h2>
+          <SectionTitle>| News</SectionTitle>
           <NewsWrapper>
             <NewsItem>
-              <NewsThumbnail />
+              <NewsThumbnail/>
               <NewsTitle>News Title</NewsTitle>
             </NewsItem>
             <NewsItem>
-              <NewsThumbnail />
+              <NewsThumbnail/>
               <NewsTitle>News Title</NewsTitle>
             </NewsItem>
             <NewsItem>
-              <NewsThumbnail />
-              <NewsTitle>News Title</NewsTitle>
-            </NewsItem>
-            <NewsItem>
-              <NewsThumbnail />
-              <NewsTitle>News Title</NewsTitle>
-            </NewsItem>
-            <NewsItem>
-              <NewsThumbnail />
-              <NewsTitle>News Title</NewsTitle>
-            </NewsItem>
-            <NewsItem>
-              <NewsThumbnail />
+              <NewsThumbnail/>
               <NewsTitle>News Title</NewsTitle>
             </NewsItem>
           </NewsWrapper>
@@ -55,14 +68,14 @@ const Home = () => {
         <SectionWrapper>
           <h2>Top Stories</h2>
           <TopStoriesWrapper>
-            <TopStoriesItem />
-            <TopStoriesItem />
-            <TopStoriesItem />
-            <TopStoriesItem />
+            <TopStoriesItem/>
+            <TopStoriesItem/>
+            <TopStoriesItem/>
+            <TopStoriesItem/>
           </TopStoriesWrapper>
         </SectionWrapper>
       </MainWrapper>
-      <Footer />
+      <Footer/>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MainWrapper = styled.main`
-  max-width: 1024px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 20px;
 `;
@@ -10,57 +10,64 @@ export const SectionWrapper = styled.section`
   margin-bottom: 40px;
 `;
 
+export const SectionTitle = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #4A4A4A;
+  margin-top: 40px;
+`;
+
 export const BannerWrapper = styled.div`
+  width: 1240px;
+  height: 380px;
+  margin-top: 20px;
   display: flex;
-
-  div:first-child {
-    margin-right: 20px;
-  }
-
-  div:last-child {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-
-    div:first-child {
-      grid-column: 1 / 2;
-      grid-row: 1 / 2;
-    }
-
-    div:last-child {
-      grid-column: 2 / 3;
-      grid-row: 1 / 3;
-    }
-
-    button:nth-child(3) {
-      grid-column: 1 / 2;
-      grid-row: 2 / 3;
-    }
-
-    button:nth-child(4) {
-      grid-column: 2 / 3;
-      grid-row: 2 / 3;
-    }
-
-    button:nth-child(5) {
-      grid-column: 1 / 2;
-      grid-row: 3 / 4;
-    }
-
-    button:nth-child(6) {
-      grid-column: 2 / 3;
-      grid-row: 3 / 4;
-    }
-  }
 `;
 
-export const BannerButton = styled.button`
-  padding: 10px 20px;
-  background-color: #000;
-  color: #fff;
+export const LeftHalf = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //background-color: #ddd;
+  padding: 0px 8px;
+`;
+
+export const BigButton = styled.button`
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  padding: 0px;
   border: none;
-  cursor: pointer;
+  //background-color: #ffd9e1;
+  //border: 2px solid #000;
 `;
+
+export const RightHalf = styled.div`
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 5px 10px;
+  padding: 0px 8px;
+  //background-color: #ddd;
+`;
+
+export const GridButton = styled.button`
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  border: none;
+  background-color: #fff;
+`;
+
+export const GridImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 
 export const NewsWrapper = styled.div`
   display: grid;
