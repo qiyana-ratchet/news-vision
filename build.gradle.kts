@@ -27,6 +27,14 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation ("org.assertj:assertj-core:3.22.0")
+    testImplementation ("org.mockito:mockito-core:4.8.0")
 }
 
 tasks.withType<Test> {
