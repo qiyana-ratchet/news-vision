@@ -1,13 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HeaderWrapper, Logo, Nav, NavItem, Weather } from './styles';
+import { HeaderWrapper, HeaderContainer, Logo, Nav, NavItem, Weather } from './styles';
+import Sunny from "../../assets/images/sunny.png";
 
 const Header = () => {
   return (
     <HeaderWrapper>
-      <Logo to="/">NewsVision</Logo>
+      <HeaderContainer>
+      <Logo to="/">News</Logo>
+      <Logo to="/" style={{color: '#6CAFFF'}}>V</Logo>
+      <Logo to="/">ision</Logo>
       <Nav>
-        <NavItem end to="/">
+        <NavItem end to="/" style={{color: '#6CAFFF'}}>
           Home
         </NavItem>
         <NavItem to="/news">News</NavItem>
@@ -18,8 +22,9 @@ const Header = () => {
         <NavItem to="/sports">Sports</NavItem>
       </Nav>
       <Weather>
-        <i className="fas fa-sun"></i> 29'C, Sunny
+        <img src={Sunny} alt="sun" style={{width:32, marginRight:10}}/> 29'C, Sunny
       </Weather>
+      </HeaderContainer>
     </HeaderWrapper>
   );
 };
