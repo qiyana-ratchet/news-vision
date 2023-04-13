@@ -1,5 +1,6 @@
 package com.example.newsvision.dto;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,17 +12,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ArticleDTO {
 
-    private Integer id;
 
     private String title;
 
-    private String reporter;
 
-    private LocalDateTime articleTime;
+    private String content;
 
-    private String article;
 
-    private String processedArticle;
+    private String newsUrl;
 
-    private URI videoPath;
+
+    private String thumUrl;
+
+
+    private LocalDateTime date;
+
+
+
 }
