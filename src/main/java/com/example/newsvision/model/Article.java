@@ -1,9 +1,8 @@
 package com.example.newsvision.model;
 
-import com.example.newsvision.dto.ArticleDTO;
+import com.example.newsvision.enums.Genre;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -17,14 +16,6 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @ToString
 public class Article {
-
-    public Article(String title, String content, String newsUrl, String thumUrl,LocalDateTime broadcast_date){
-        this.title = title;
-        this.content = content;
-        this.newsUrl = newsUrl;
-        this.thumUrl = thumUrl;
-        this.broadcast_date = broadcast_date;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,19 +37,16 @@ public class Article {
     private LocalDateTime broadcast_date;
 
     //번역된 기사를 여기다 넣으려고함. 지금은 Content에 들어가 있는 것은 영문;
-    @Column(name="k_content")
-    private String p_article;
+    @Column(name="k_content",length = 5000)
+    private String k_content;
 
-    @Column(name="uri")
+    @Column(name="p_content",length = 5000)
+    private String p_content;
+
+    @Column(name="video_uri")
     private URI videoPath;
 
-
-//
-//    @Column(name="p_article")
-//    @Lob
-//    private String processedArticle;
-//
-//    @Column(name="uri")
-//    private URI videoPath;
-
+    @Column(name = "genre")
+    @Enumerated(value = EnumType.STRING)
+    private Genre genre;
 }

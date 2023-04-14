@@ -28,15 +28,12 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     //msql
-    implementation("com.mysql:mysql-connector-j:8.0.32")		// <-- 추가됨
-
+    implementation("com.mysql:mysql-connector-j:8.0.32")
     //json-simple , json parsing
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
-
 
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine")

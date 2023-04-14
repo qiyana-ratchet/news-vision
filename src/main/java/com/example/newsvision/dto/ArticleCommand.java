@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 
 @Getter
