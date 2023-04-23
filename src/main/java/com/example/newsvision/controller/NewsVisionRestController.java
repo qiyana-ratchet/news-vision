@@ -5,6 +5,7 @@ import com.example.newsvision.service.NewsVisionService;
 import com.example.newsvision.support.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +34,6 @@ public class NewsVisionRestController {
     @Autowired
     private ArticleTextProcessor articleTextProcessor;
     @Autowired
-    private ArticleTranslator articleTranslator;
-    @Autowired
     private ArticleGenreResolver articleGenreResolver;
 
 
@@ -42,10 +43,10 @@ public class NewsVisionRestController {
     @GetMapping("api-test")
     public void initTest() {
         List<ArticleDTO> articleDTOS;
-        String str = articleApiProcessor.getApiArticle();
+        //String str = articleApiProcessor.getApiArticle(LocalDate.now());
+        String str = articleApiProcessor.getApiArticle(LocalDate.of(2023, 04, 23));
         try {
             articleDTOS = articleDTOConverter.articleApiStrToDTOs(str);
-            articleDTOS = articleTranslator.translate(articleDTOS);
             articleDTOS = articleTextProcessor.articleProcess(articleDTOS);
             articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
             newsVisionService.saveArticles(articleDTOS);
@@ -59,11 +60,11 @@ public class NewsVisionRestController {
      */
     @GetMapping("/article")
     public ResponseEntity<ArticleDTO> getOneArticle(@RequestHeader HttpHeaders qHeaders,
-                                                    @RequestParam("id") Integer id) throws Exception {
+                                                    @RequestParam("id") Integer id) {
 
         if(id == null)  return ResponseEntity.badRequest().body(null);
 
-        ArticleDTO articleDTO = null;
+        ArticleDTO articleDTO;
         try{
             articleDTO = newsVisionService.findById(id);
         }catch (Exception e){
@@ -78,11 +79,11 @@ public class NewsVisionRestController {
      */
     @PatchMapping("/video/{id}")
     public ResponseEntity<HashMap<String, String>> getVideo(@RequestHeader HttpHeaders qHeaders,
-                                @PathVariable("id") Integer id) throws Exception {
+                                @PathVariable("id") Integer id) {
 
         if(id == null)  return ResponseEntity.badRequest().body(null);
 
-        URI videoPath = null;
+        URI videoPath;
         try {
             ArticleDTO articleDTO = newsVisionService.findById(id);
             videoPath = videoProcessor.videoProcess(articleDTO);
@@ -98,27 +99,28 @@ public class NewsVisionRestController {
     }
 
     /**
-     * 페이지 번호로 기사 리스트(페이지) 가져오기
+     * 페이지 번호로 기사 리스트(페이지) 가져오기 -> /news/list?page=1
      */
     @GetMapping("/list")
-    public ResponseEntity<?> getPage(@RequestHeader HttpHeaders qHeaders,
-                                     @RequestParam("page") Integer page) throws Exception {
+    public ResponseEntity<Page<ArticleDTO>> getPage(@RequestHeader HttpHeaders qHeaders,
+                                     @RequestParam("page") Integer pageNo) {
 
-        if(page == null)  return ResponseEntity.badRequest().body(null);
-        //구현
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(null);
+        if(pageNo == null)  return ResponseEntity.badRequest().body(null);
+
+        pageNo = (pageNo == 0) ? 0 : (pageNo - 1);
+        Page<ArticleDTO> articleDTOPage;
+        try{
+            articleDTOPage = newsVisionService.getPage(pageNo, Policy.pageSize);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(articleDTOPage);
     }
 
 
-//    /**
-//     * Entity 전부 반환; 추후에 DTO로 바꿔서 변환,
-//     * @return
-//     */
-//    @GetMapping("find-all")
-//    public List<Article> findAll() {
-//        List<Article> articles = articleRepository.findAll();
-//        return articles;
-//    }
+
 
 
 //    @GetMapping("/list")

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class ArticleApiProcessor {
@@ -13,15 +15,15 @@ public class ArticleApiProcessor {
      * API를 활용해서, JSON으로 받아온다.
      *
      */
-    public String getApiArticle() {
+    public String getApiArticle(LocalDate localDate) {
         String result = "";
         try {
-            URL url = new URL("https://apis.data.go.kr/B551024/openArirangNewsApi/news?serviceKey=HEci6vuXdvuixZTrl%2BCC005MdpP7SRLGBfejMx7xlqgCvBcuq7hvpsn19J3Hla5cBoz6BxozJxjl2un4kRqsZg%3D%3D&pageNo=1&numOfRows=10");
-            //뒤에 row는 기사 몇개 가져올 것인지, pageNo = pageNO;
-            BufferedReader bf;
-            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            //날짜 포맷을 [20230423] 형식으로 변환
+            String date = localDate.format(DateTimeFormatter.BASIC_ISO_DATE);
+            String urlString = String.format(Policy.apiUrl, Policy.articleCountsByOneApi, date);
+            URL url = new URL(urlString);
+            BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
             result = bf.readLine();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

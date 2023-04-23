@@ -10,16 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
 
-    @Query("select a from Article a")
-    public Page<Article> selectAll(Pageable pageable);
+    @Query(value = "select a from Article a", countQuery = "select(a) from Article a")
+    Page<Article> selectAllbyPage(Pageable pageable);
 
-    //<S extends T> S save(S entity);
+    @Query(value = "select new com.example.newsvision.model.Article(a.id, a.title, " +
+            "a.broadcast_date, a.reporter, a.thumUrl, a.genre) from Article a",
+            countQuery = "select count(a) from Article a")
+    Page<Article> selectThumbyPage(Pageable pageable);
+
 
 }
-
-/*
-1. 기사 삽입 (o)
-2. 기사 조회 (날짜로 조회, ID로 조회, 영상이 있는 기사 조회?)
-3. 모든 기사 조회 (o)
-4. 기사 삭제 (날짜 기준으로 삭제)
- */

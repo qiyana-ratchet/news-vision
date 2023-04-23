@@ -23,14 +23,19 @@ public class ArticleTextProcessor {
 
     public ArticleDTO articleProcess(ArticleDTO articleDTO) throws Exception{
         if(articleDTO == null) throw new IllegalArgumentException("no articleDTO");
-        //구현
+
+        String p_string = articleProcess(articleDTO.getContent());
+        articleDTO.setP_content(p_string);
 
         return articleDTO;
     }
 
     public List<ArticleDTO> articleProcess(List<ArticleDTO> articleDTOS) throws Exception{
         if(articleDTOS == null) throw new IllegalArgumentException("no articleDTOS");
-        //구현
+
+        for(int i = 0; i < articleDTOS.size(); ++i){
+            articleDTOS.set(i, articleProcess(articleDTOS.get(i)));
+        }
 
         return articleDTOS;
     }
