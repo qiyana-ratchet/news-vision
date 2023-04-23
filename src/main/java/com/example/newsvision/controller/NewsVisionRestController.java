@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class NewsVisionRestController {
     public void initTest() {
         List<ArticleDTO> articleDTOS;
         //String str = articleApiProcessor.getApiArticle(LocalDate.now());
-        String str = articleApiProcessor.getApiArticle(LocalDate.of(2023, 04, 23));
+        String str = articleApiProcessor.getApiArticle(LocalDate.of(2023, 4, 23));
         try {
             articleDTOS = articleDTOConverter.articleApiStrToDTOs(str);
             articleDTOS = articleTextProcessor.articleProcess(articleDTOS);
