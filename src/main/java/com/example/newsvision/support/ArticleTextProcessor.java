@@ -17,7 +17,7 @@ public class ArticleTextProcessor {
                 .replaceAll("\\{.*\\}", "")
                 .replaceAll("%", "퍼센트")
                 .replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9,.!? ]", "")
-                .replaceAll("\\b([a-zA-z]*\\.[a-zA-z]+)\\b", "");
+                .replaceAll("\\b([a-zA-Z]*\\.[a-zA-Z]+)\\b", "");
 
         return result;
     }
