@@ -47,7 +47,8 @@ public class NewsVisionRestController {
         try {
             articleDTOS = articleDTOConverter.articleApiStrToDTOs(str);
             articleDTOS = articleTextProcessor.articleProcess(articleDTOS);
-            articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
+//            articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
+
             newsVisionService.saveArticles(articleDTOS);
         } catch (Exception e) {
             e.printStackTrace();

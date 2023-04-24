@@ -35,6 +35,11 @@ dependencies {
     //json-simple , json parsing
     implementation("com.googlecode.json-simple:json-simple:1.1.1")
 
+    //chatgpt
+    implementation("com.squareup.okhttp3:okhttp:4.5.0")
+
+
+
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine")
     testImplementation ("org.assertj:assertj-core:3.22.0")

@@ -2,8 +2,8 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/newsvision
-        username: news-vision
-        password:
+        username: root
+        password: liverpool12!
     jpa:
         hibernate:
           ddl-auto: create
