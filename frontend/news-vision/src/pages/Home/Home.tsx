@@ -17,8 +17,14 @@ import {
   ButtonTitle,
   ButtonSummary,
   GridImg,
-  SectionTitle, DescSection, GridDescSection, GridButtonTitle, GridSectionTitle, GridTitleContainer,
+  SectionTitle,
+  DescSection,
+  GridDescSection,
+  GridButtonTitle,
+  GridSectionTitle,
+  GridTitleContainer,
 } from './styles';
+
 import vNews1 from '../../assets/images/image39.png';
 import vNews2 from '../../assets/images/image40.png';
 import vNews3 from '../../assets/images/image60.png';

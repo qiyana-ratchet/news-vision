@@ -123,10 +123,10 @@ export const DescSection = styled.div`
 export const ButtonTitle = styled.div`
   width: 95%;
   letter-spacing: 0.01em;
-  font-family: 'BBKK';
+  font-family: 'ReithSansLt', "Baskerville Old Face",serif !important;
   font-size: 2rem;
   line-height: 1.2;
-  font-weight: 500;
+  font-weight: 100;
   color: white;
   text-align: left;
 `;
@@ -138,7 +138,7 @@ export const ButtonSummary = styled.div`
   font-size: 1rem;
   margin-top: 0.5rem;
   letter-spacing: 0.01em;
-  font-family: 'ReithSans', Arial, Helvetica, sans-serif;
+  font-family: 'ReithSansLt', Arial, Helvetica, sans-serif;
   line-height: 1.2;
   margin-bottom: 30px;
 `;
