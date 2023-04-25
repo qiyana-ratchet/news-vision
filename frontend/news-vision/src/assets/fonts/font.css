@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "ReithSans";
+    src: url('./ReithSans_Rg.ttf');
+}
+
+@font-face {
+    font-family: "Subrayada";
+    src: url('./MontserratSubrayada-Regular.ttf');
+}
+
+@font-face {
+    font-family: "BBKK";
+    src: url('./TiltPrism-Regular-VariableFont_XROT,YROT.ttf');
+}
