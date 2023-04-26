@@ -175,11 +175,6 @@ export const NewsWrapper = styled.div`
   margin-top: 15px;
 `;
 
-export const NewsItem = styled.div`
-  border-radius: 1px;
-  overflow: hidden;
-`;
-
 export const NewsThumbnail = styled.img`
   width: 100%;
   object-fit: cover;
@@ -199,6 +194,14 @@ export const NewsTitle = styled.h3`
   font-weight: bold;
   line-height: 1.2;
   color: #212121;
+`;
+
+export const NewsItem = styled.div`
+  border-radius: 1px;
+  overflow: hidden;
+  &:hover ${NewsTitle} {
+    text-decoration: underline;
+  }
 `;
 
 export const NewsSummary = styled.h3`

@@ -27,12 +27,17 @@ export const FooterLinks = styled.div`
   margin-bottom: 17px;
   letter-spacing: 0.1px;
 
-
   a {
     color: white;
     text-decoration: none;
     margin-right: 30px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer
+    }
   }
+
 
 `;
 

@@ -95,6 +95,11 @@ export const NavBarPostTitle = styled.div`
   font-weight: 400;
   font-family: ReithSerif, Helvetica, Arial;
   letter-spacing: 0.02em;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer
+  }
 `;
 
 export const NavBarPostDesc = styled.div`
@@ -114,16 +119,26 @@ export const NavBarFeatures = styled.div`
   margin-top: 20px;
 `;
 
+export const NavBarImgDesc = styled.div`
+  font-size: 20px;
+  font-weight: 400;
+  font-family: ReithSerif, Helvetica, Arial;
+  letter-spacing: 0.02em;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer
+  }
+`;
+
 export const NavImgWrapper = styled.div`
   width: 330px;
   height: 180px;
   margin-top: 85px;
-`;
 
-export const NavBarImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  &:hover ${NavBarImgDesc} {
+    text-decoration: underline;
+  }
 `;
 
 export const DescWrapper = styled.div`
@@ -134,11 +149,15 @@ export const DescWrapper = styled.div`
   padding: 0px 20px;
 `;
 
-export const NavBarImgDesc = styled.div`
-  font-size: 20px;
-  font-weight: 400;
-  font-family: ReithSerif, Helvetica, Arial;
-  letter-spacing: 0.02em;
+export const NavBarImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 

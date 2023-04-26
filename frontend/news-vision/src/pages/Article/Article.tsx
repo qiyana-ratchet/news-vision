@@ -106,22 +106,22 @@ const Article = () => {
             <NavImgWrapper>
               <NavBarImg src={Feature1} alt="news image"/>
               <DescWrapper>
-              <NavBarImgDesc>Heavy cost of war for Russia's 'best of the best</NavBarImgDesc>
+              <NavBarImgDesc>Ukraine rapidly expanding its 'Army of Drones'</NavBarImgDesc>
               </DescWrapper>
             </NavImgWrapper>
             <NavImgWrapper>
               <NavBarImg src={Feature2} alt="news image"/>
               <DescWrapper>
-                <NavBarImgDesc>Heavy cost of war for Russia's 'best of the best</NavBarImgDesc>
+                <NavBarImgDesc>Ukraine rapidly expanding its 'Army of Drones'</NavBarImgDesc>
               </DescWrapper>
             </NavImgWrapper>
             <NavImgWrapper>
               <NavBarImg src={Feature3} alt="news image"/>
               <DescWrapper>
-                <NavBarImgDesc>Heavy cost of war for Russia's 'best of the best</NavBarImgDesc>
+                <NavBarImgDesc>Ukraine rapidly expanding its 'Army of Drones'</NavBarImgDesc>
               </DescWrapper>
             </NavImgWrapper>
-
+            
           </NavBarFeatures>
         </NavBarWrapper>
       </SiteContainer>
