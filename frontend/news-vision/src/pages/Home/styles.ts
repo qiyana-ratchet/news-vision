@@ -7,7 +7,7 @@ export const MainWrapper = styled.main`
 `;
 
 export const SectionWrapper = styled.section`
-  margin-top: 30px;
+  margin-top: 45px;
   margin-bottom: 50px;
 `;
 
@@ -123,7 +123,7 @@ export const DescSection = styled.div`
 export const ButtonTitle = styled.div`
   width: 95%;
   letter-spacing: 0.01em;
-  font-family: 'ReithSansLt', "Baskerville Old Face",serif !important;
+  font-family: 'BBC Reith Sans', Arial,serif;
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 100;
