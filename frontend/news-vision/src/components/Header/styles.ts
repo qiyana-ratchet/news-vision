@@ -9,6 +9,7 @@ export const HeaderWrapper = styled.header`
   background-color: #000;
   color: #fff;
   font-family: 'Prociono', serif;
+  font-weight: 400;
 `;
 
 export const HeaderContainer = styled.nav`
