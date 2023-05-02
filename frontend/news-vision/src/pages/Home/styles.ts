@@ -7,7 +7,7 @@ export const MainWrapper = styled.main`
 `;
 
 export const SectionWrapper = styled.section`
-  margin-top: 30px;
+  margin-top: 45px;
   margin-bottom: 50px;
 `;
 
@@ -123,7 +123,7 @@ export const DescSection = styled.div`
 export const ButtonTitle = styled.div`
   width: 95%;
   letter-spacing: 0.01em;
-  font-family: 'ReithSansLt', "Baskerville Old Face",serif !important;
+  font-family: 'BBC Reith Sans', Arial,serif;
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 100;
@@ -175,11 +175,6 @@ export const NewsWrapper = styled.div`
   margin-top: 15px;
 `;
 
-export const NewsItem = styled.div`
-  border-radius: 1px;
-  overflow: hidden;
-`;
-
 export const NewsThumbnail = styled.img`
   width: 100%;
   object-fit: cover;
@@ -199,6 +194,14 @@ export const NewsTitle = styled.h3`
   font-weight: bold;
   line-height: 1.2;
   color: #212121;
+`;
+
+export const NewsItem = styled.div`
+  border-radius: 1px;
+  overflow: hidden;
+  &:hover ${NewsTitle} {
+    text-decoration: underline;
+  }
 `;
 
 export const NewsSummary = styled.h3`
