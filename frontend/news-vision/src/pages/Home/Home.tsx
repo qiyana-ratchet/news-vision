@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import {
@@ -22,7 +22,7 @@ import {
   GridDescSection,
   GridButtonTitle,
   GridSectionTitle,
-  GridTitleContainer,
+  GridTitleContainer, GridImgLeft,
 } from './styles';
 
 import vNews1 from '../../assets/images/image39.png';
@@ -40,17 +40,60 @@ import News5 from '../../assets/images/image58.png';
 import News6 from '../../assets/images/image59.png';
 import {useNavigate} from "react-router-dom";
 
+
+interface News {
+  id: number;
+  title: string;
+  broadcast_date: string;
+  reporter: string;
+  content: string | null;
+  p_content: string | null;
+  thumUrl: string | null;
+  videoPath: string | null;
+  genre: string | null;
+}
+
+interface NewsList {
+  content: News[];
+}
+
 const Home = () => {
   const navigate = useNavigate();
+  const [newsList, setNewsList] = useState<News[]>([]);
+
+  useEffect(() => {
+    async function fetchNewsList() {
+      try {
+        const response = await fetch('http://localhost:8080/news/list?page=0');
+        const data: NewsList = await response.json();
+        setNewsList(data.content);
+        console.log("Fetched Data from API")
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchNewsList();
+  }, []);
 
   function myFunction() {
     navigate('/article');
     // alert("clicked");
   }
 
-
   return (
     <>
+      {/*<div>*/}
+      {/*  {newsList.map((news) => (*/}
+      {/*    <div key={news.id}>*/}
+      {/*      <h2>{news.title}</h2>*/}
+      {/*      <p>{news.reporter}</p>*/}
+      {/*      <p>{news.broadcast_date}</p>*/}
+      {/*      {news.thumUrl && <img src={news.thumUrl} alt={news.title} />}*/}
+      {/*      <p>{news.content}</p>*/}
+      {/*    </div>*/}
+      {/*  ))}*/}
+      {/*</div>*/}
       <Header/>
       <MainWrapper>
         <SectionWrapper>
@@ -58,20 +101,29 @@ const Home = () => {
           <BannerWrapper>
             <LeftHalf>
               <BigButton onClick={myFunction}>
-                <GridImg src={vNews3} alt="news image"/>
+                {/*<GridImgLeft src={vNews3} alt="news image"/>*/}
+                {/*<ButtonTitle>US airman to appear in court over intelligence leak</ButtonTitle>*/}
+                {/*<ButtonSummary>Jack Teixeira faces charges in Boston after classified files on the war in Ukraine*/}
+                {/*  appeared online.*/}
+                {/*</ButtonSummary>*/}
+                {newsList.length > 0 ? (newsList[0].thumUrl &&
+                    <GridImgLeft src={newsList[0].thumUrl} alt={newsList[0].title}/>) :
+                  <GridImgLeft src={vNews3} alt="news image"/>}
                 <DescSection>
-                  <ButtonTitle>US airman to appear in court over intelligence leak</ButtonTitle>
-                  <ButtonSummary>Jack Teixeira faces charges in Boston after classified files on the war in Ukraine
-                    appeared online.
-                  </ButtonSummary>
+                  {newsList.length > 0 ? <ButtonTitle>{newsList[0].title}</ButtonTitle> : <div></div>}
+                  {/*<ButtonSummary>2019년 할리우드에서 열린 '어벤져스:엔드게임' 출연진 핸드프린팅 행사 현장의 조핸슨</ButtonSummary>*/}
                 </DescSection>
               </BigButton>
             </LeftHalf>
             <RightHalf>
               <GridButton onClick={myFunction}>
-                <GridImg src={vNews4} alt="news image"/>
+                {/*<GridImg src={vNews4} alt="news image"/>*/}
+                {newsList.length > 0 ? (newsList[1].thumUrl &&
+                    <GridImg src={newsList[1].thumUrl} alt={newsList[1].title}/>) :
+                  <GridImg src={vNews3} alt="news image"/>}
                 <DescSection>
-                  <GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>
+                  {/*<GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>*/}
+                  {newsList.length > 0 ? <GridButtonTitle>{newsList[1].title}</GridButtonTitle> : <div></div>}
                   <GridTitleContainer>
                     <GridSectionTitle style={{color: '#6CAFFF'}}>|&nbsp;</GridSectionTitle>
                     <GridSectionTitle>News</GridSectionTitle>
@@ -79,9 +131,13 @@ const Home = () => {
                 </DescSection>
               </GridButton>
               <GridButton onClick={myFunction}>
-                <GridImg src={vNews5} alt="news image"/>
+                {/*<GridImg src={vNews5} alt="news image"/>*/}
+                {newsList.length > 0 ? (newsList[2].thumUrl &&
+                    <GridImg src={newsList[2].thumUrl} alt={newsList[2].title}/>) :
+                  <GridImg src={vNews3} alt="news image"/>}
                 <DescSection>
-                  <GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>
+                  {/*<GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>*/}
+                  {newsList.length > 0 ? <GridButtonTitle>{newsList[2].title}</GridButtonTitle> : <div></div>}
                   <GridTitleContainer>
                     <GridSectionTitle style={{color: '#6CAFFF'}}>|&nbsp;</GridSectionTitle>
                     <GridSectionTitle>News</GridSectionTitle>
@@ -89,9 +145,13 @@ const Home = () => {
                 </DescSection>
               </GridButton>
               <GridButton onClick={myFunction}>
-                <GridImg src={vNews6} alt="news image"/>
+                {/*<GridImg src={vNews6} alt="news image"/>*/}
+                {newsList.length > 0 ? (newsList[3].thumUrl &&
+                    <GridImg src={newsList[3].thumUrl} alt={newsList[3].title}/>) :
+                  <GridImg src={vNews3} alt="news image"/>}
                 <DescSection>
-                  <GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>
+                  {/*<GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>*/}
+                  {newsList.length > 0 ? <GridButtonTitle>{newsList[3].title}</GridButtonTitle> : <div></div>}
                   <GridTitleContainer>
                     <GridSectionTitle style={{color: '#6CAFFF'}}>|&nbsp;</GridSectionTitle>
                     <GridSectionTitle>News</GridSectionTitle>
@@ -99,9 +159,13 @@ const Home = () => {
                 </DescSection>
               </GridButton>
               <GridButton onClick={myFunction}>
-                <GridImg src={vNews7} alt="news image"/>
+                {/*<GridImg src={vNews7} alt="news image"/>*/}
+                {newsList.length > 0 ? (newsList[4].thumUrl &&
+                    <GridImg src={newsList[4].thumUrl} alt={newsList[4].title}/>) :
+                  <GridImg src={vNews3} alt="news image"/>}
                 <DescSection>
-                  <GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>
+                  {/*<GridButtonTitle>US airman to appear in court over intelligence leak</GridButtonTitle>*/}
+                  {newsList.length > 0 ? <GridButtonTitle>{newsList[4].title}</GridButtonTitle> : <div></div>}
                   <GridTitleContainer>
                     <GridSectionTitle style={{color: '#6CAFFF'}}>|&nbsp;</GridSectionTitle>
                     <GridSectionTitle>News</GridSectionTitle>
@@ -117,19 +181,28 @@ const Home = () => {
           <SectionTitle>News</SectionTitle>
           <NewsWrapper>
             <NewsItem>
-              <NewsThumbnail src={News1} alt="news image"/>
+              {/*<NewsThumbnail src={News1} alt="news image"/>*/}
+              {newsList.length > 0 ? (newsList[6].thumUrl &&
+                  <NewsThumbnail src={newsList[6].thumUrl} alt={newsList[6].title}/>) :
+                <NewsThumbnail src={vNews3} alt="news image"/>}
               <NewsTitle>Dove or dog: China makes peace while baring its teeth</NewsTitle>
               <NewsSummary>As Beijing tries to play peacemaker, its actions over Taiwan threaten to undercut its
                 goals.</NewsSummary>
             </NewsItem>
             <NewsItem>
-              <NewsThumbnail src={News2} alt="news image"/>
+              {/*<NewsThumbnail src={News2} alt="news image"/>*/}
+              {newsList.length > 0 ? (newsList[7].thumUrl &&
+                  <NewsThumbnail src={newsList[7].thumUrl} alt={newsList[7].title}/>) :
+                <NewsThumbnail src={vNews3} alt="news image"/>}
               <NewsTitle>Texas dairy farm explosion kills 18,000 cows</NewsTitle>
               <NewsSummary>Animal welfare activists say the incident is "by far" the deadliest barn fire in recent
                 memory.</NewsSummary>
             </NewsItem>
             <NewsItem>
-              <NewsThumbnail src={News3} alt="news image"/>
+              {/*<NewsThumbnail src={News3} alt="news image"/>*/}
+              {newsList.length > 0 ? (newsList[1].thumUrl &&
+                  <NewsThumbnail src={newsList[1].thumUrl} alt={newsList[1].title}/>) :
+                <NewsThumbnail src={vNews3} alt="news image"/>}
               <NewsTitle>North Korea tests 'most powerful' missile to date</NewsTitle>
               <NewsSummary>It says the new solid-fuel intercontinental ballistic missile will improve its nuclear
                 counterattack capability.</NewsSummary>

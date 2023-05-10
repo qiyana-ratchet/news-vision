@@ -36,7 +36,8 @@ public class ArticleDTOConverter {
             String title = articleObject.get("TITLE").toString();
             String content = articleObject.get("BODY").toString();
             String reporter = articleObject.get("WRITER_NAME").toString();
-            String thum_url = Policy.imgSource + articleObject.get("IMG").toString();
+            String temp_url = Policy.imgSource + articleObject.get("IMG").toString();
+            String thum_url = temp_url.replace("T.jpg","P4.jpg");
             String temp_date = articleObject.get("DATETIME").toString();
 
             LocalDateTime broadcast_date = LocalDateTime.parse(temp_date,

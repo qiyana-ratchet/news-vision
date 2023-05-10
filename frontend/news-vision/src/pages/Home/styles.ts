@@ -44,12 +44,24 @@ export const LeftHalf = styled.div`
 
 export const RightHalf = styled.div`
   width: 50%;
+  height: 380px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 10px 10px;
   padding: 0px 10px;
   //background-color: #ddd;
+`;
+
+export const ButtonTitle = styled.div`
+  width: 95%;
+  letter-spacing: 0.01em;
+  font-family:'BBC Reith Sans';
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 100;
+  color: white;
+  text-align: left;
 `;
 
 export const BigButton = styled.button`
@@ -68,6 +80,22 @@ export const BigButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+
+  // &:hover ${ButtonTitle} {
+  //   text-decoration: underline;
+  //   text-decoration-thickness: 2px;
+  // }
+`;
+
+export const GridButtonTitle = styled.div`
+  width: 95%;
+  letter-spacing: 0.01em;
+  font-family: 'BBKK';
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: 500;
+  color: white;
+  text-align: left;
 `;
 
 export const GridButton = styled.div`
@@ -78,7 +106,7 @@ export const GridButton = styled.div`
   width: 100%;
   height: 100%;
   font-size: 1.5rem;
-  object-fit: contain;
+  object-fit: cover;
   border: none;
   background-color: #fff;
   cursor: pointer;
@@ -86,6 +114,11 @@ export const GridButton = styled.div`
   &:hover {
     opacity: 0.9;
   }
+  
+  // &:hover ${GridButtonTitle} {
+  //   text-decoration: underline;
+  //   text-decoration-thickness: 1px;
+  // }
 `;
 
 export const GridDescSection = styled.div`
@@ -120,17 +153,6 @@ export const DescSection = styled.div`
   font-size: 2rem;
 `;
 
-export const ButtonTitle = styled.div`
-  width: 95%;
-  letter-spacing: 0.01em;
-  font-family: 'BBC Reith Sans', Arial,serif;
-  font-size: 2rem;
-  line-height: 1.2;
-  font-weight: 100;
-  color: white;
-  text-align: left;
-`;
-
 export const ButtonSummary = styled.div`
   width: 95%;
   color: #d3d3d3;;
@@ -143,17 +165,6 @@ export const ButtonSummary = styled.div`
   margin-bottom: 30px;
 `;
 
-export const GridButtonTitle = styled.div`
-  width: 95%;
-  letter-spacing: 0.01em;
-  font-family: 'BBKK';
-  font-size: 1.25rem;
-  line-height: 1.2;
-  font-weight: 500;
-  color: white;
-  text-align: left;
-`;
-
 export const GridTitleContainer = styled.div`
   width: 95%;
   flex-direction: row;
@@ -162,9 +173,15 @@ export const GridTitleContainer = styled.div`
   margin-top: -5px;
 `;
 
-export const GridImg = styled.img`
+export const GridImgLeft = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
+`;
+
+export const GridImg = styled.img`
+  width: 100%;
+  height: 184px;
   object-fit: cover;
 `;
 
@@ -177,6 +194,7 @@ export const NewsWrapper = styled.div`
 
 export const NewsThumbnail = styled.img`
   width: 100%;
+  height: 225px;
   object-fit: cover;
   background-color: #ddd;
   cursor: pointer;
