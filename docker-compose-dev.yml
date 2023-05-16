@@ -1,0 +1,58 @@
+version: '3.9'
+services:
+  backend:
+    build:
+      context: ./backend
+    networks:
+      - private
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/newsvision
+      SPRING_DATASOURCE_USERNAME: jinseok
+      SPRING_DATASOURCE_PASSWORD: 1234    
+      DB_HOST: db
+
+  db:
+    image: mysql:8.0.22
+    environment:
+      MYSQL_ROOT_PASSWORD: liverpool12!
+      MYSQL_DATABASE: newsvision
+      MYSQL_USER: jinseok
+      MYSQL_PASSWORD: 1234
+    ports:
+      - 3306:3306
+    networks:
+      - private
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD']
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend/news-vision
+      dockerfile: Dockerfile.dev
+    networks:
+      - public
+    depends_on:
+      - backend
+    stdin_open: true
+
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    networks:
+      - public
+      - private
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+    
+networks:
+  private:
+  public:

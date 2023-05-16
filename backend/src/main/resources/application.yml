@@ -1,9 +1,9 @@
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://${DB_HOST:localhost}:3306/newsvision
-        username: jinseok
-        password: 1234
+        url: ${SPRING_DATASOURCE_URL}
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
     jpa:
         hibernate:
           ddl-auto: create
