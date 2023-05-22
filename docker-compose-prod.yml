@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  backend:
+    image: gultz/n-backend
+    networks:
+      - private
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://newsvision.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com/newsvision
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: liverpool12!
+    volumes:
+      - my-data:/workspace/app
+  nginx:
+    image: gultz/n-nginx
+    networks:
+      - public
+      - private
+    ports:
+      - 80:80
+  frontend:
+    image: gultz/n-frontend
+    networks:
+      - public
+    volumes:
+      - my-data:/app
+    stdin_open: true
+networks:
+  public:
+  private:
+volumes:
+  my-data:
