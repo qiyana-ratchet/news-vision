@@ -48,11 +48,35 @@ services:
     networks:
       - public
       - private
+      - tts
+      - wave2lip
     depends_on:
       - backend
     ports:
       - 80:80
+  tts:
+    build:
+      context: ./ai/tts
+    networks:
+      - tts
+    depends_on:
+      - backend
+    volumes:
+      - my_data:/app/data
+  wave2lip:
+    build:
+      context: ./ai/wave2lip
+    networks:
+      - wave2lip
+    depends_on:
+      - backend
+    volumes:
+      - my_data:/app/data
     
 networks:
   private:
   public:
+  tts:
+  wave2lip:
+volumes:
+  my_data:
