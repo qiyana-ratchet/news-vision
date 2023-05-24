@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    networks:
+      - tts
+      - wave2lip
+    depends_on:
+      - tts
+      - wave2lip
+    ports:
+      - 80:80
+  tts:
+    build:
+      context: ./ai/tts
+    networks:
+      - tts
+    volumes:
+      - my_data:/workspace/ai
+  wave2lip:
+    build:
+      context: ./ai/wave2lip
+    networks:
+      - wave2lip
+    volumes:
+    - my_data:/workspace/ai
+networks:
+  tts:
+  wave2lip:
+volumes:
+  my_data:
