@@ -1,6 +1,5 @@
 version: '3.9'
 services:
-  
   nginx:
     restart: always
     build:

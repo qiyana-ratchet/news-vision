@@ -13,7 +13,6 @@ services:
       SPRING_DATASOURCE_USERNAME: jinseok
       SPRING_DATASOURCE_PASSWORD: 1234    
       DB_HOST: db
-
   db:
     image: mysql:8.0.22
     environment:
@@ -72,7 +71,6 @@ services:
       - backend
     volumes:
       - shared_data:/workspace/video
-    
 networks:
   private:
   public:
