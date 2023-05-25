@@ -7,10 +7,10 @@ services:
       context: ./nginx
     networks:
       - tts
-      - wave2lip
+      - wav2lip
     depends_on:
       - tts
-      - wave2lip
+      - wav2lip
     ports:
       - 80:80
   tts:
@@ -19,16 +19,16 @@ services:
     networks:
       - tts
     volumes:
-      - my_data:/workspace/ai
-  wave2lip:
+      - shared_data:/workspace/voice
+  wav2lip:
     build:
-      context: ./ai/wave2lip
+      context: ./ai/wav2lip
     networks:
-      - wave2lip
+      - wav2lip
     volumes:
-    - my_data:/workspace/ai
+    - shared_data:/workspace/video
 networks:
   tts:
-  wave2lip:
+  wav2lip:
 volumes:
-  my_data:
+  shared_data:
