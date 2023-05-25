@@ -30,7 +30,7 @@ public class ArticleDTO {
 
     private String thumUrl;
 
-    private URI videoPath;
+    private String videoPath;
 
     private Genre genre;
 }

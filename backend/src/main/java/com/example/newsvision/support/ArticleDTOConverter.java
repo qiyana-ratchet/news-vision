@@ -120,22 +120,4 @@ public class ArticleDTOConverter {
         return articleDTOPage;
     }
 
-
-
-
-//    public ArticleDTO toDTOFromCommand(ArticleCommand command) throws Exception{
-//        if(command == null) throw new IllegalArgumentException("no command");
-//        ArticleDTO articleDTO = new ArticleDTO();
-//        String processedArticle = articleProcessing.articleProcess(command.getArticle());
-//        //videoProcess
-//
-//        articleDTO.setTitle(command.getTitle());
-//        articleDTO.setReporter(command.getReporter());
-//        articleDTO.setArticleTime(command.getArticleTime());
-//        articleDTO.setArticle(command.getArticle());
-//        articleDTO.setArticle(processedArticle);
-//        articleDTO.setVideoPath(null); //
-//        return articleDTO;
-//    }
-
 }

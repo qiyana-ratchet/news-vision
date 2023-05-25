@@ -77,24 +77,64 @@ public class NewsVisionRestController {
     /**
      * 기사 ID로 영상 경로 가져오기
      */
-    @PatchMapping("/video/{id}")
+    @GetMapping("/video/{id}")
     public ResponseEntity<HashMap<String, String>> getVideo(@RequestHeader HttpHeaders qHeaders,
                                 @PathVariable("id") Integer id) {
 
         if(id == null)  return ResponseEntity.badRequest().body(null);
 
-        URI videoPath;
+        String videoPath = "";
+        int sFlag = 0;
+        ArticleDTO articleDTO = null;
         try {
-            ArticleDTO articleDTO = newsVisionService.findById(id);
-            videoPath = videoProcessor.videoProcess(articleDTO);
-            newsVisionService.updateVideoPath(articleDTO);
+            synchronized (newsVisionService){
+                articleDTO = newsVisionService.findById(id);
+                if(articleDTO.getVideoPath() == null){
+                    articleDTO.setVideoPath("Pending");
+                    newsVisionService.updateArticle(articleDTO);
+                    sFlag = 1;
+                }
+                else if(articleDTO.getVideoPath().equals("Pending")){
+                    sFlag = 2;
+                }
+                else{
+                    sFlag = 3;
+                }
+            }
+
+            if(sFlag == 1){
+                videoPath = videoProcessor.videoProcess(articleDTO);
+                articleDTO.setVideoPath(videoPath);
+                newsVisionService.updateArticle(articleDTO);
+            }
+            else if(sFlag == 3){
+                videoPath = articleDTO.getVideoPath();
+            }
         }catch(Exception e){
             e.printStackTrace();
+            if(articleDTO != null){
+                try{
+                    articleDTO.setVideoPath(null);
+                    newsVisionService.updateArticle(articleDTO);
+                }catch (Exception e2){
+                    e2.printStackTrace();
+                }
+            }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("URI", videoPath.getPath());
+        switch(sFlag){
+            case 1, 3:
+                hashMap.put("URI", videoPath);
+                break;
+            case 2:
+                hashMap.put("URI", "Pending");
+                break;
+            default:
+                hashMap.put("URI", "Video Error");
+        }
+
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(hashMap);
     }
 
@@ -118,39 +158,4 @@ public class NewsVisionRestController {
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(articleDTOPage);
     }
-
-
-
-
-
-//    @GetMapping("/list")
-//    public ResponseEntity<?> getNews(@RequestHeader HttpHeaders qHeaders,
-//                                @Valid @ModelAttribute ArticleCommand articleCommand,
-//                                BindingResult bindingResult) throws Exception {
-//
-//    }
-//
-//    @PostMapping("/postArticle")
-//    public ResponseEntity<List<ObjectError>> postText(@RequestHeader HttpHeaders qHeaders,
-//                                                      @Valid @RequestBody ArticleCommand articleCommand,
-//                                                      BindingResult bindingResult) throws Exception {
-//
-//        //if the submitted data has any validation error
-//        if(bindingResult.hasErrors()) {
-//            return ResponseEntity.badRequest()
-//                    .contentType(MediaType.APPLICATION_JSON).body(bindingResult.getAllErrors());
-//        }
-//
-//        ArticleDTO articleDTO;
-//        try{
-//            articleDTO = articleDTOConverter.toDTOFromCommand(articleCommand);
-//            articleDTO = newsVisionService.createArticle(articleDTO);
-//        }catch (Exception e){
-//            return ResponseEntity.badRequest()
-//                    .contentType(MediaType.APPLICATION_JSON).body(null);
-//        }
-//                //if the request has succeeded
-//        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(null);
-//    }
-
 }

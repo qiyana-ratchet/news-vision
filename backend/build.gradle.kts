@@ -19,8 +19,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -29,6 +27,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     //msql
     implementation("com.mysql:mysql-connector-j:8.0.32")
@@ -38,12 +37,6 @@ dependencies {
     //chatgpt
     implementation("com.squareup.okhttp3:okhttp:4.5.0")
 
-
-
-    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation ("org.assertj:assertj-core:3.22.0")
-    testImplementation ("org.mockito:mockito-core:4.8.0")
 }
 
 tasks.withType<Test> {
