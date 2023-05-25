@@ -7,6 +7,7 @@ RUN pip install ipython && \
     pip install git+https://github.com/gultz/TensorFlowTTS.git && \
     pip install git+https://github.com/repodiac/german_transliterate.git#egg=german_transliterate
 WORKDIR /workspace
+RUN mkdir /workspace/voice
 
 COPY requirements.txt /workspace
 RUN pip install -r requirements.txt
