@@ -49,7 +49,7 @@ services:
       - public
       - private
       - tts
-      - wave2lip
+      - wav2lip
     depends_on:
       - backend
     ports:
@@ -62,21 +62,21 @@ services:
     depends_on:
       - backend
     volumes:
-      - my_data:/workspace/ai
-  wave2lip:
+      - shared_data:/workspace/voice
+  wav2lip:
     build:
-      context: ./ai/wave2lip
+      context: ./ai/wav2lip
     networks:
-      - wave2lip
+      - wav2lip
     depends_on:
       - backend
     volumes:
-      - my_data:/workspace/ai
+      - shared_data:/workspace/video
     
 networks:
   private:
   public:
   tts:
-  wave2lip:
+  wav2lip:
 volumes:
-  my_data:
+  shared_data:
