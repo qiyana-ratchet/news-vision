@@ -16,7 +16,7 @@ def test():
     context = data['context']
 
     #volume에 저장할 file_path생성
-    audio_path = '/workspace/ai/' + title +'.mp3'
+    audio_path = '/workspace/voice/' + title +'.mp3'
     
 
     #inference
@@ -30,12 +30,15 @@ def test():
     # with open(file_path,'w') as file:
     #     json.dump(context,file)
 
+    voice_path= '/workspace/video/'+ title+'.mp3'
     
     
-    json_data = {'audio_path': audio_path}
-    res = requests.post('http://nginx/wave2lip', json=json_data)
+    json_data = {'audio_path': voice_path,'title': title}
+    res = requests.post('http://nginx/wav2lip', json=json_data)
 
-    return res.file_path
+
+
+    return "sucess tts"
 
 
 
