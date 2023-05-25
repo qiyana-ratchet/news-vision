@@ -31,6 +31,7 @@ def test():
     args.face = '1.mp4'
     args.audio = audio_path
     args.outfile = '/workspace/video/' + title + '.mp4'
+    
     args.static = False
     args.fps = 25
     args.pads = [0, 10, 0, 0]

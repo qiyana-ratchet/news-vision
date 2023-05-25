@@ -14,6 +14,7 @@ def test():
     data = request.get_json()
     title = data['title']
     context = data['context']
+    #context = data['p_content']
 
     #volume에 저장할 file_path생성
     audio_path = '/workspace/voice/' + title +'.mp3'
