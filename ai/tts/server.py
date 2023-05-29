@@ -13,8 +13,7 @@ def test():
     #데이터를 json으로 받아온다.
     data = request.get_json()
     title = data['title']
-    context = data['context']
-    #context = data['p_content']
+    context = data['p_content']
 
     #volume에 저장할 file_path생성
     audio_path = '/workspace/voice/' + title +'.mp3'
@@ -39,7 +38,7 @@ def test():
 
 
 
-    return "sucess tts"
+    return res.text
 
 
 

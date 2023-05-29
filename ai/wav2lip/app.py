@@ -268,14 +268,8 @@ def test():
     
     main()
 
-    return "sucess wav2lip"
+    return args.outfile
     
 
 if __name__=='__main__':
     app.run()
-
-
-
-    
-
-
