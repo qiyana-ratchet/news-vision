@@ -59,6 +59,7 @@ services:
   tts:
     build:
       context: ./ai/tts
+      dockerfile: Dockerfile.dev
     networks:
       - tts
     depends_on:
@@ -68,6 +69,7 @@ services:
   wav2lip:
     build:
       context: ./ai/wav2lip
+      dockerfile: Dockerfile.dev
     networks:
       - wav2lip
     depends_on:
