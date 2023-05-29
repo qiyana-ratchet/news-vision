@@ -19,4 +19,5 @@ ENV FLASK_ENV development
 ENV FLASK_RUN_PORT 8000
 ENV FLASK_RUN_HOST 0.0.0.0
 
+#CMD ["python","server.py"]
 CMD ["flask","run"]

@@ -40,4 +40,14 @@ public class ArticleTextProcessor {
 
         return articleDTOS;
     }
+
+    public ArticleDTO articleTitleProcess(ArticleDTO articleDTO) throws Exception{
+        if(articleDTO == null) throw new IllegalArgumentException("no articleDTO");
+
+        String p_string = articleProcess(articleDTO.getTitle());
+        p_string = p_string.replaceAll("\\s", "_");
+        articleDTO.setP_title(p_string);
+
+        return articleDTO;
+    }
 }
