@@ -40,6 +40,14 @@ services:
       - tts
     volumes:
       - shared_data:/workspace/voice
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
   wav2lip:
     image: gultz/vision-wav2lip
     build:
