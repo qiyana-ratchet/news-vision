@@ -15,8 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,51 +31,16 @@ public class ChatGpt {
     protected OkHttpClient client;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public ChatGpt(final String apiKey)
-    {
-        this.apiKey = apiKey;
-        this.client = new OkHttpClient();
-
-    }
-
-    public ChatGpt(String apiKey, OkHttpClient client) {
-        this.apiKey = apiKey;
+    public ChatGpt(String apiKey, OkHttpClient client){
+        this.apiKey=apiKey;
         this.client = client;
     }
 
-    public ChatGpt(String apiKey, Proxy proxy) {
-        this.apiKey = apiKey;
-        client = new OkHttpClient.Builder().proxy(proxy).build();
+    public ChatGpt(String apiKey, String apiHost, OkHttpClient clinet){
+        this.apiKey=apiKey;
+        this.apiHost=apiHost;
+        this.client=client;
     }
-
-
-    public ChatGpt(String apiHost, String apiKey) {
-        this.apiHost = apiHost;
-        this.apiKey = apiKey;
-        this.client = new OkHttpClient();
-    }
-
-    public ChatGpt(String apiHost, String apiKey, OkHttpClient client) {
-        this.apiHost = apiHost;
-        this.apiKey = apiKey;
-        this.client = client;
-    }
-
-    public ChatGpt(String apiHost, String apiKey, Proxy proxy) {
-        this.apiHost = apiHost;
-        this.apiKey = apiKey;
-        client = new OkHttpClient.Builder().proxy(proxy).build();
-    }
-
-
-    public ChatGpt(String apiHost, String apiKey, String proxyHost, int proxyPort) {
-        this.apiHost = apiHost;
-        this.apiKey = apiKey;
-        client = new OkHttpClient.Builder().
-                proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort)))
-                .build();
-    }
-
 
 
 
