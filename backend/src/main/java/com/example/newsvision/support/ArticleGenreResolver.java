@@ -22,7 +22,7 @@ public class ArticleGenreResolver {
                 "    FOREIGN_POLICY,\n" +
                 "    NORTH_KOREA,\n" +
                 "    COVID_19,\n" +
-                "   s LIFE_CULTURE,\n" +
+                "    LIFE_CULTURE,\n" +
                 "    IT_SCIENCE,\n" +
                 "    SPORTS,\n" +
                 "    WEATHER  중 어느 것에 속하는 기사인지 위에 기준대로 한단어로 출력해.");

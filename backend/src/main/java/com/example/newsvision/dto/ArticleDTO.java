@@ -20,6 +20,8 @@ public class ArticleDTO {
 
     private String title;
 
+    private String p_title;
+
     private LocalDateTime broadcast_date;
 
     private String reporter;
@@ -30,7 +32,7 @@ public class ArticleDTO {
 
     private String thumUrl;
 
-    private URI videoPath;
+    private String videoPath;
 
     private Genre genre;
 }

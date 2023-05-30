@@ -12,9 +12,8 @@ app = Flask(__name__)
 def test():
     #데이터를 json으로 받아온다.
     data = request.get_json()
-    title = data['title']
-    context = data['context']
-    #context = data['p_content']
+    title = data['p_title']
+    context = data['p_content']
 
     #volume에 저장할 file_path생성
     audio_path = '/workspace/voice/' + title +'.mp3'
@@ -31,15 +30,13 @@ def test():
     # with open(file_path,'w') as file:
     #     json.dump(context,file)
 
-    voice_path= '/workspace/video/'+ title+'.mp3'
+    voice_path= '/workspace/video/'+ title +'.mp3'
     
     
     json_data = {'audio_path': voice_path,'title': title}
     res = requests.post('http://nginx/wav2lip', json=json_data)
 
-
-
-    return "sucess tts"
+    return res.text
 
 
 
