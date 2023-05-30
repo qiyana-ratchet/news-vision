@@ -1,7 +1,6 @@
 version: '3.9'
 services:
   backend:
-    image: gultz/vision-backend
     build:
       context: ./backend
     networks:
@@ -11,7 +10,6 @@ services:
       SPRING_DATASOURCE_USERNAME: jinseok
       SPRING_DATASOURCE_PASSWORD: liverpool12!    
   nginx:
-    image: gultz/vision-nginx
     build:
       context: ./nginx
     networks:
@@ -22,7 +20,6 @@ services:
     ports:
       - 80:80
   frontend:
-    image: gultz/vision-frontend
     build: 
       context: ./frontend/news-vision
       dockerfile: Dockerfile.prod
@@ -32,7 +29,6 @@ services:
       - shared_data:/app/video
     stdin_open: true
   tts:
-    image: gultz/vision-tts
     build:
       context: ./ai/tts
       dockerfile: Dockerfile.prod
@@ -49,7 +45,6 @@ services:
               capabilities: [gpu]
     
   wav2lip:
-    image: gultz/vision-wav2lip
     build:
       context: ./ai/wav2lip
       dockerfile: Dockerfile.prod
