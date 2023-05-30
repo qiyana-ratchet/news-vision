@@ -37,8 +37,8 @@ def test():
     args.pads = [0, 10, 0, 0]
     #args.face_det_batch_size = 16
     #args.wav2lip_batch_size = 128
-    args.face_det_batch_size = 2
-    args.wav2lip_batch_size = 16
+    args.face_det_batch_size = 1
+    args.wav2lip_batch_size = 4
     args.resize_factor = 1
     args.crop = [0, -1, 0, -1]
     args.box = [-1, -1, -1, -1]
