@@ -6,7 +6,7 @@ services:
     networks:
       - private
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://ecs-newsvision.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com/newsvision
+      SPRING_DATASOURCE_URL: jdbc:mysql:/ec2-test-newsvision.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com/newsvision
       SPRING_DATASOURCE_USERNAME: jinseok
       SPRING_DATASOURCE_PASSWORD: liverpool12!    
   nginx:
