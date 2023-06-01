@@ -76,9 +76,8 @@ const Home = () => {
     fetchNewsList();
   }, []);
 
-  function myFunction() {
-    navigate('/article');
-    // alert("clicked");
+  function myFunction(newsId: number) {
+    navigate('/article', { state: { newsId } });
   }
 
   return (
@@ -100,7 +99,7 @@ const Home = () => {
           <SectionTitle>Today's Virtual News</SectionTitle>
           <BannerWrapper>
             <LeftHalf>
-              <BigButton onClick={myFunction}>
+              <BigButton onClick={() => myFunction(newsList[0].id)}>
                 {/*<GridImgLeft src={vNews3} alt="news image"/>*/}
                 {/*<ButtonTitle>US airman to appear in court over intelligence leak</ButtonTitle>*/}
                 {/*<ButtonSummary>Jack Teixeira faces charges in Boston after classified files on the war in Ukraine*/}
@@ -116,7 +115,7 @@ const Home = () => {
               </BigButton>
             </LeftHalf>
             <RightHalf>
-              <GridButton onClick={myFunction}>
+              <GridButton onClick={() => myFunction(newsList[1].id)}>
                 {/*<GridImg src={vNews4} alt="news image"/>*/}
                 {newsList.length > 0 ? (newsList[1].thumUrl &&
                     <GridImg src={newsList[1].thumUrl} alt={newsList[1].title}/>) :
@@ -130,7 +129,7 @@ const Home = () => {
                   </GridTitleContainer>
                 </DescSection>
               </GridButton>
-              <GridButton onClick={myFunction}>
+              <GridButton onClick={() => myFunction(newsList[2].id)}>
                 {/*<GridImg src={vNews5} alt="news image"/>*/}
                 {newsList.length > 0 ? (newsList[2].thumUrl &&
                     <GridImg src={newsList[2].thumUrl} alt={newsList[2].title}/>) :
@@ -144,7 +143,7 @@ const Home = () => {
                   </GridTitleContainer>
                 </DescSection>
               </GridButton>
-              <GridButton onClick={myFunction}>
+              <GridButton onClick={() => myFunction(newsList[3].id)}>
                 {/*<GridImg src={vNews6} alt="news image"/>*/}
                 {newsList.length > 0 ? (newsList[3].thumUrl &&
                     <GridImg src={newsList[3].thumUrl} alt={newsList[3].title}/>) :
@@ -158,7 +157,7 @@ const Home = () => {
                   </GridTitleContainer>
                 </DescSection>
               </GridButton>
-              <GridButton onClick={myFunction}>
+              <GridButton onClick={() => myFunction(newsList[4].id)}>
                 {/*<GridImg src={vNews7} alt="news image"/>*/}
                 {newsList.length > 0 ? (newsList[4].thumUrl &&
                     <GridImg src={newsList[4].thumUrl} alt={newsList[4].title}/>) :
