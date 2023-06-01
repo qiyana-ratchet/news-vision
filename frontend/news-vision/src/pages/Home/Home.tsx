@@ -64,7 +64,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchNewsList() {
       try {
-        const response = await fetch('/news/list?page=0');
+        const response = await fetch('http://localhost:8080/news/list?page=0');
         const data: NewsList = await response.json();
         setNewsList(data.content);
         console.log("Fetched Data from API")
@@ -111,6 +111,10 @@ const Home = () => {
                 <DescSection>
                   {newsList.length > 0 ? <ButtonTitle>{newsList[0].title}</ButtonTitle> : <div></div>}
                   {/*<ButtonSummary>2019년 할리우드에서 열린 '어벤져스:엔드게임' 출연진 핸드프린팅 행사 현장의 조핸슨</ButtonSummary>*/}
+                  <GridTitleContainer>
+                    <GridSectionTitle style={{color: '#6CAFFF'}}>|&nbsp;</GridSectionTitle>
+                    <GridSectionTitle>News</GridSectionTitle>
+                  </GridTitleContainer>
                 </DescSection>
               </BigButton>
             </LeftHalf>
