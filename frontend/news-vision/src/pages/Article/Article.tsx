@@ -29,6 +29,8 @@ import Feature1 from "../../assets/images/image66.png";
 import Feature2 from "../../assets/images/image67.png";
 import Feature3 from "../../assets/images/image68.png";
 import {useLocation} from "react-router-dom";
+// @ts-ignore
+import video1 from "../../assets/videos/Starship(720p).mp4";
 
 interface ArticleData {
   id: number;
@@ -45,6 +47,7 @@ interface ArticleData {
 const Article = () => {
   const location = useLocation();
   const [articleData, setArticleData] = useState<ArticleData | null>(null);
+  const [videoLoadingError, setVideoLoadingError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,6 +71,12 @@ const Article = () => {
     return date.toLocaleDateString('en-US', options);
   };
 
+  const handleVideoError = (event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const videoElement = event.currentTarget;
+    console.error(`Error loading video: ${videoElement.error?.message}`);
+    setVideoLoadingError(true);
+  };
+
   return (
     <>
       <Header/>
@@ -81,8 +90,25 @@ const Article = () => {
               </SectionWrapper>
               <ArticleTitle>{articleData?.title}</ArticleTitle>
               <ArticleDate>{articleData?.broadcast_date && formatDate(articleData.broadcast_date)}</ArticleDate>
+              {/*<ArticleImgWrapper>*/}
+              {/*  {articleData?.videoPath && !videoLoadingError ? (*/}
+              {/*    <video controls autoPlay loop muted={false} style={{ width: '100%', height: '100%' }} onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>*/}
+              {/*      <source src={video1} type="video/mp4" />*/}
+              {/*      Your browser does not support the video tag.*/}
+              {/*    </video>*/}
+              {/*  ) : (*/}
+              {/*    <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image" />*/}
+              {/*  )}*/}
+              {/*</ArticleImgWrapper>*/}
               <ArticleImgWrapper>
-                <ArticleImg src={articleData?.thumUrl ?? '기본 이미지 URL 또는 대체값'} alt="news image"/>
+                {articleData?.videoPath && !videoLoadingError ? (
+                  <video controls autoPlay loop muted={false} style={{ width: '100%', height: '100%' }} onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>
+                    <source src={articleData?.videoPath} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image" />
+                )}
               </ArticleImgWrapper>
             </ArticleHeader>
             <ArticleContent>
