@@ -58,7 +58,7 @@ export const ArticleImg = styled.img`
 `;
 
 export const ArticleContent = styled.div`
-  height: 600px;
+  //height: 600px;
 
   p {
     margin-bottom: 20px;
