@@ -271,7 +271,7 @@ def test():
     
     main()
 
-    return args.outfile
+    return '/app/video/' + title + '.mp4'
     
 
 if __name__=='__main__':

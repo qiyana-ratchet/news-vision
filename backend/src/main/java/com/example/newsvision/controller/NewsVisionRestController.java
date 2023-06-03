@@ -48,25 +48,25 @@ public class NewsVisionRestController {
         try {
             articleDTOS = articleDTOConverter.articleApiStrToDTOs(str);
             articleDTOS = articleTextProcessor.articleProcess(articleDTOS);
-            articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
+            //articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
 
-//            Random random = new Random();
-//            random.setSeed(System.currentTimeMillis());
-//            for(ArticleDTO articleDTO : articleDTOS){
-//                switch(random.nextInt(7)){
-//                    case 0:
-//                        articleDTO.setGenre(Genre.POLITICS);
-//                        break;
-//                    case 1:
-//                        articleDTO.setGenre(Genre.ECONOMY);
-//                        break;
-//                    case 2:
-//                        articleDTO.setGenre(Genre.SCIENCE);
-//                        break;
-//                    default:
-//                        articleDTO.setGenre(Genre.MISCELLANEOUS);
-//                }
-//            }
+            Random random = new Random();
+            random.setSeed(System.currentTimeMillis());
+            for(ArticleDTO articleDTO : articleDTOS){
+                switch(random.nextInt(7)){
+                    case 0:
+                        articleDTO.setGenre(Genre.POLITICS);
+                        break;
+                    case 1:
+                        articleDTO.setGenre(Genre.ECONOMY);
+                        break;
+                    case 2:
+                        articleDTO.setGenre(Genre.SCIENCE);
+                        break;
+                    default:
+                        articleDTO.setGenre(Genre.MISCELLANEOUS);
+                }
+            }
 
             newsVisionService.saveArticles(articleDTOS);
         } catch (Exception e) {
