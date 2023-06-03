@@ -56,16 +56,12 @@ public class NewsVisionService {
         return articleDTOPage;
     }
 
-    public void updateVideoPath(ArticleDTO articleDTO) throws Exception{
-        //구현
+    public void updateArticle(ArticleDTO articleDTO) throws Exception{
+        if(articleDTO == null) throw new IllegalArgumentException("no articleDTO");
+
+        Article article = articleDTOConverter.articleDTOToEntity(articleDTO);
+        articleRepository.saveAndFlush(article);
     }
-
-
-//        public ArticleDTO createArticle(final ArticleDTO articleDTO) throws Exception {
-//        if (articleDTO == null) throw new IllegalArgumentException("no articleDTO");
-//        Article article = articleDTOConverter.toEntity(articleDTO);
-//        return articleDTOConverter.toDTOFromEntity(articleRepository.save(article));
-//    }
 
 }
 

@@ -41,7 +41,7 @@ public class Article {
     private String thumUrl;
 
     @Column(name="video_uri")
-    private URI videoPath;
+    private String videoPath;
 
     @Column(name = "genre")
     @Enumerated(value = EnumType.STRING)

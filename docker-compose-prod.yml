@@ -1,31 +1,69 @@
 version: '3.9'
 services:
   backend:
-    image: gultz/n-backend
+    build:
+      context: ./backend
     networks:
       - private
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://newsvision.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com/newsvision
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: liverpool12!
-    volumes:
-      - my-data:/workspace/app
+      SPRING_DATASOURCE_URL: jdbc:mysql://ec2-test-newsvision.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com/newsvision
+      SPRING_DATASOURCE_USERNAME: jinseok
+      SPRING_DATASOURCE_PASSWORD: liverpool12!    
   nginx:
-    image: gultz/n-nginx
+    build:
+      context: ./nginx
     networks:
       - public
       - private
+      - tts
+      - wav2lip
     ports:
       - 80:80
   frontend:
-    image: gultz/n-frontend
+    build: 
+      context: ./frontend/news-vision
+      dockerfile: Dockerfile.prod
     networks:
       - public
     volumes:
-      - my-data:/app
+      - shared_data:/app/video
     stdin_open: true
+  tts:
+    build:
+      context: ./ai/tts
+      dockerfile: Dockerfile.prod
+    networks:
+      - tts
+    volumes:
+      - shared_data:/workspace/voice
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+  wav2lip:
+    build:
+      context: ./ai/wav2lip
+      dockerfile: Dockerfile.prod
+    networks:
+      - wav2lip
+    volumes:
+      - shared_data:/workspace/video
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
 networks:
   public:
   private:
+  wav2lip:
+  tts:
 volumes:
-  my-data:
+  shared_data:

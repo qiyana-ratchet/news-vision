@@ -27,7 +27,7 @@ def test():
     #arg path
 
     args = argparse.Namespace()
-    args.checkpoint_path = 'checkpoints/wav2lip.pth'
+    args.checkpoint_path = '/workspace/checkpoints/wav2lip.pth'
     args.face = '1.mp4'
     args.audio = audio_path
     args.outfile = '/workspace/video/' + title + '.mp4'
@@ -35,8 +35,10 @@ def test():
     args.static = False
     args.fps = 25
     args.pads = [0, 10, 0, 0]
-    args.face_det_batch_size = 16
-    args.wav2lip_batch_size = 128
+    #args.face_det_batch_size = 16
+    #args.wav2lip_batch_size = 128
+    args.face_det_batch_size = 1
+    args.wav2lip_batch_size = 4
     args.resize_factor = 1
     args.crop = [0, -1, 0, -1]
     args.box = [-1, -1, -1, -1]
@@ -268,14 +270,8 @@ def test():
     
     main()
 
-    return "sucess wav2lip"
+    return args.outfile
     
 
 if __name__=='__main__':
     app.run()
-
-
-
-    
-
-
