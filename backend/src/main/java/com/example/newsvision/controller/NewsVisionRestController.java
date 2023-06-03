@@ -6,17 +6,19 @@ import com.example.newsvision.service.NewsVisionService;
 import com.example.newsvision.support.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.support.ResourceRegion;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
@@ -96,9 +98,70 @@ public class NewsVisionRestController {
     /**
      * 기사 ID로 영상 경로 가져오기
      */
+//    @GetMapping("/video/{id}")
+//    public ResponseEntity<HashMap<String, String>> getVideo(@RequestHeader HttpHeaders qHeaders,
+//                                @PathVariable("id") Integer id) {
+//
+//        if(id == null)  return ResponseEntity.badRequest().body(null);
+//
+//        String videoPath = "";
+//        int sFlag = 0;
+//        ArticleDTO articleDTO = null;
+//        try {
+//            synchronized (newsVisionService){
+//                articleDTO = newsVisionService.findById(id);
+//                if(articleDTO.getVideoPath() == null){
+//                    articleDTO.setVideoPath("Pending");
+//                    newsVisionService.updateArticle(articleDTO);
+//                    sFlag = 1;
+//                }
+//                else if(articleDTO.getVideoPath().equals("Pending")){
+//                    sFlag = 2;
+//                }
+//                else{
+//                    sFlag = 3;
+//                }
+//            }
+//
+//            if(sFlag == 1){
+//                videoPath = videoProcessor.videoProcess(articleDTO);
+//                articleDTO.setVideoPath(videoPath);
+//                newsVisionService.updateArticle(articleDTO);
+//            }
+//            else if(sFlag == 3){
+//                videoPath = articleDTO.getVideoPath();
+//            }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//            if(articleDTO != null){
+//                try{
+//                    articleDTO.setVideoPath(null);
+//                    newsVisionService.updateArticle(articleDTO);
+//                }catch (Exception e2){
+//                    e2.printStackTrace();
+//                }
+//            }
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        }
+//
+//        HashMap<String, String> hashMap = new HashMap<>();
+//        switch(sFlag){
+//            case 1, 3:
+//                hashMap.put("URI", videoPath);
+//                break;
+//            case 2:
+//                hashMap.put("URI", "Pending");
+//                break;
+//            default:
+//                hashMap.put("URI", "Video Error");
+//        }
+//
+//        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(hashMap);
+//    }
+
     @GetMapping("/video/{id}")
-    public ResponseEntity<HashMap<String, String>> getVideo(@RequestHeader HttpHeaders qHeaders,
-                                @PathVariable("id") Integer id) {
+    public ResponseEntity<FileSystemResource> getVideo(@RequestHeader HttpHeaders qHeaders,
+                                                            @PathVariable("id") Integer id) throws IOException {
 
         if(id == null)  return ResponseEntity.badRequest().body(null);
 
@@ -142,19 +205,18 @@ public class NewsVisionRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        HashMap<String, String> hashMap = new HashMap<>();
+        FileSystemResource fileSystemResource;
         switch(sFlag){
             case 1, 3:
-                hashMap.put("URI", videoPath);
-                break;
-            case 2:
-                hashMap.put("URI", "Pending");
+                fileSystemResource = new FileSystemResource(videoPath);
                 break;
             default:
-                hashMap.put("URI", "Video Error");
+                fileSystemResource = null;
         }
 
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(hashMap);
+        //qHeaders.setContentType(MediaType.parseMediaType("video/mp4"));
+        qHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return ResponseEntity.ok().headers(qHeaders).body(fileSystemResource);
     }
 
     /**
