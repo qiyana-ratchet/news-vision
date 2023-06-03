@@ -14,6 +14,7 @@ def test():
     data = request.get_json()
     title = data['p_title']
     context = data['p_content']
+    genre = data['genre']
 
     #volume에 저장할 file_path생성
     audio_path = '/workspace/voice/' + title +'.mp3'
@@ -33,7 +34,7 @@ def test():
     voice_path= '/workspace/video/'+ title +'.mp3'
     
     
-    json_data = {'audio_path': voice_path,'title': title}
+    json_data = {'audio_path': voice_path,'title': title, 'genre': genre}
     res = requests.post('http://nginx/wav2lip', json=json_data)
 
     return res.text

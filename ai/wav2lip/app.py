@@ -20,6 +20,7 @@ def test():
     data = request.get_json()
     audio_path = data['audio_path']
     title = data['title']
+    genre = data['genre']
 
     if audio_path is None:
         return "Error: 'audio_path' key is missing in the JSON data."
@@ -28,7 +29,7 @@ def test():
 
     args = argparse.Namespace()
     args.checkpoint_path = '/workspace/checkpoints/wav2lip.pth'
-    args.face = '1.mp4'
+    args.face = '1.mp4' if (genre == 'POLITICS' or genre == 'ECONOMY' or genre == 'SCIENCE') else '2.mp4'
     args.audio = audio_path
     args.outfile = '/workspace/video/' + title + '.mp4'
     

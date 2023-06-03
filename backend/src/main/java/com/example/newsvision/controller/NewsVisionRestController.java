@@ -1,6 +1,7 @@
 package com.example.newsvision.controller;
 
 import com.example.newsvision.dto.ArticleDTO;
+import com.example.newsvision.enums.Genre;
 import com.example.newsvision.service.NewsVisionService;
 import com.example.newsvision.support.*;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @RestController
@@ -43,11 +44,29 @@ public class NewsVisionRestController {
     public void initTest() {
         List<ArticleDTO> articleDTOS;
         //String str = articleApiProcessor.getApiArticle(LocalDate.now());
-        String str = articleApiProcessor.getApiArticle(LocalDate.of(2023, 4, 23));
+        String str = articleApiProcessor.getApiArticle(LocalDate.of(2023, 6, 01));
         try {
             articleDTOS = articleDTOConverter.articleApiStrToDTOs(str);
             articleDTOS = articleTextProcessor.articleProcess(articleDTOS);
             articleDTOS = articleGenreResolver.resolveGenre(articleDTOS);
+
+//            Random random = new Random();
+//            random.setSeed(System.currentTimeMillis());
+//            for(ArticleDTO articleDTO : articleDTOS){
+//                switch(random.nextInt(7)){
+//                    case 0:
+//                        articleDTO.setGenre(Genre.POLITICS);
+//                        break;
+//                    case 1:
+//                        articleDTO.setGenre(Genre.ECONOMY);
+//                        break;
+//                    case 2:
+//                        articleDTO.setGenre(Genre.SCIENCE);
+//                        break;
+//                    default:
+//                        articleDTO.setGenre(Genre.MISCELLANEOUS);
+//                }
+//            }
 
             newsVisionService.saveArticles(articleDTOS);
         } catch (Exception e) {
