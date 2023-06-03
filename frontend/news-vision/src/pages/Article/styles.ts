@@ -20,6 +20,23 @@ export const ArticleHeader = styled.div`
   margin-bottom: 40px;
 `;
 
+export const StyledButton = styled.button`
+  font-family: 'Montserrat', sans-serif;
+  color: #6CAFFF;
+  font-size: 3rem;
+  text-align: center;
+  //center
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #6CAFFF;
+  margin-bottom: 40px;
+  
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
 export const ArticleTitle = styled.h1`
   font-family: 'Noto Sans KR', Arial;
   font-style: normal;
@@ -47,7 +64,7 @@ export const ArticleDate = styled.span`
 export const ArticleImgWrapper = styled.div`
   height: 400px;
   background-color: #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
   margin-top: 14px;
 `;
 
