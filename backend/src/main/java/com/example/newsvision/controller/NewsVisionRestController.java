@@ -214,8 +214,10 @@ public class NewsVisionRestController {
                 fileSystemResource = null;
         }
 
-        //qHeaders.setContentType(MediaType.parseMediaType("video/mp4"));
-        qHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        qHeaders.setContentType(MediaType.parseMediaType("video/mp4"));
+        qHeaders.setContentDisposition(ContentDisposition.inline().build());
+
+//         qHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return ResponseEntity.ok().headers(qHeaders).body(fileSystemResource);
     }
 

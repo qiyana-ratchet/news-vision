@@ -33,6 +33,11 @@ import {useLocation} from "react-router-dom";
 import video1 from "../../assets/videos/Starship(720p).mp4";
 // @ts-ignore
 import video2 from "../../assets/videos/iu.mp4";
+// // @ts-ignore
+// import video3 from "/app/video/배우_김수로,_영국_축구팀_첼시_로버스_FC_구단주_사임.mp4";
+// // @ts-ignore
+// import video4 from "../../../app/video/배우_김수로,_영국_축구팀_첼시_로버스_FC_구단주_사임.mp4";
+
 
 interface ArticleData {
   id: number;
@@ -52,6 +57,7 @@ const Article = () => {
   const [videoLoadingError, setVideoLoadingError] = useState(false);
   const [videoURI, setVideoURI] = useState("");
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,6 +67,8 @@ const Article = () => {
         );
         const data: ArticleData = await response.json();
         setArticleData(data);
+        console.log("data: ", data)
+        console.log("articleData: ", articleData)
       } catch (error) {
         console.error(error);
       }
@@ -68,6 +76,7 @@ const Article = () => {
 
     fetchData();
   }, [location.state?.newsId]);
+
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'};
@@ -81,22 +90,36 @@ const Article = () => {
     setVideoLoadingError(true);
   };
 
-  const handleCreateVideo = () => {
-    if (!articleData?.videoPath) {
-      // fetch(`http://localhost:8080/news/video/${articleData?.id}`)
-      fetch(`/news/video/${articleData?.id}`)
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response from the API if needed
-          console.log(data);
-          setVideoURI(data.URI);
-          // Navigate to the video creation page
-          // history.push(`/news/video/${articleData?.id}`);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+  // const handleCreateVideo = () => {
+  //   fetch(`/news/video/${articleData?.id}`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log("data: ", data);
+  //       // setVideoURI(data.URI);
+  //       // console.log("data.URI: ", data.URI);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // };
+
+  const handleCreateVideo = async () => {
+    fetch(`/news/video/${articleData?.id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch video');
+        }
+        return response.blob();
+      })
+      .then(blobData => {
+        // 영상 데이터를 처리하는 로직 작성
+        console.log('Video data:', blobData);
+        setVideoURI(URL.createObjectURL(blobData));
+        console.log(videoURI)
+      })
+      .catch(error => {
+        console.error('Error fetching video:', error);
+      });
   };
 
   return (
@@ -116,27 +139,30 @@ const Article = () => {
               {/*  {articleData?.videoPath && !videoLoadingError ? (*/}
               {/*    <video controls autoPlay loop muted={false} style={{width: '100%', height: '100%'}}*/}
               {/*           onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>*/}
-              {/*      <source src={articleData?.videoPath} type="video/mp4"/>*/}
+              {/*      /!*<source src={require(videoURI)} type="video/mp4"/>*!/*/}
+              {/*      <source src={videoURI} type="video/mp4"/>*/}
+              {/*      /!*<source src={video1} type="video/mp4"/>*!/*/}
               {/*      Your browser does not support the video tag.*/}
               {/*    </video>*/}
               {/*  ) : (*/}
               {/*    <>*/}
               {/*      <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>*/}
-              {/*      <StyledButton>Create Video</StyledButton>*/}
+              {/*      <StyledButton onClick={handleCreateVideo}>Create Video</StyledButton>*/}
               {/*    </>*/}
               {/*  )}*/}
               {/*</ArticleImgWrapper>*/}
               <ArticleImgWrapper>
-                {articleData?.videoPath && !videoLoadingError ? (
-                  <video controls autoPlay loop muted={false} style={{width: '100%', height: '100%'}}
+                {videoURI && !videoLoadingError ? (
+                  <video controls autoPlay loop muted={true} style={{width: '100%', height: '100%'}}
                          onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>
+                    {/*<source src={require(videoURI)} type="video/mp4"/>*/}
                     <source src={videoURI} type="video/mp4"/>
                     Your browser does not support the video tag.
                   </video>
                 ) : (
                   <>
                     <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>
-                    <StyledButton onClick={handleCreateVideo}>Create Video</StyledButton>
+                    <StyledButton onClick={handleCreateVideo}>Show Video</StyledButton>
                   </>
                 )}
               </ArticleImgWrapper>
@@ -196,6 +222,7 @@ const Article = () => {
               </NavImgWrapper>
               <NavImgWrapper>
                 <NavBarImg src={Feature3} alt="news image"/>
+
                 <DescWrapper>
                   <NavBarImgDesc>Ukraine rapidly expanding its 'Army of Drones'</NavBarImgDesc>
                 </DescWrapper>
