@@ -20,7 +20,7 @@ import {
   NavImgWrapper,
   NavBarImgDesc,
   DescWrapper,
-  SiteWrapper,
+  SiteWrapper, StyledButton,
 
 } from './styles';
 import {SectionTitle, SectionWrapper} from "../Home/styles";
@@ -31,6 +31,8 @@ import Feature3 from "../../assets/images/image68.png";
 import {useLocation} from "react-router-dom";
 // @ts-ignore
 import video1 from "../../assets/videos/Starship(720p).mp4";
+// @ts-ignore
+import video2 from "../../assets/videos/iu.mp4";
 
 interface ArticleData {
   id: number;
@@ -48,12 +50,14 @@ const Article = () => {
   const location = useLocation();
   const [articleData, setArticleData] = useState<ArticleData | null>(null);
   const [videoLoadingError, setVideoLoadingError] = useState(false);
+  const [videoURI, setVideoURI] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/news/article?id=${location.state?.newsId}`
+          // `http://localhost:8080/news/article?id=${location.state?.newsId}`
+          `/news/article?id=${location.state?.newsId}`
         );
         const data: ArticleData = await response.json();
         setArticleData(data);
@@ -77,6 +81,24 @@ const Article = () => {
     setVideoLoadingError(true);
   };
 
+  const handleCreateVideo = () => {
+    if (!articleData?.videoPath) {
+      // fetch(`http://localhost:8080/news/video/${articleData?.id}`)
+      fetch(`/news/video/${articleData?.id}`)
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response from the API if needed
+          console.log(data);
+          setVideoURI(data.URI);
+          // Navigate to the video creation page
+          // history.push(`/news/video/${articleData?.id}`);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  };
+
   return (
     <>
       <Header/>
@@ -92,25 +114,34 @@ const Article = () => {
               <ArticleDate>{articleData?.broadcast_date && formatDate(articleData.broadcast_date)}</ArticleDate>
               {/*<ArticleImgWrapper>*/}
               {/*  {articleData?.videoPath && !videoLoadingError ? (*/}
-              {/*    <video controls autoPlay loop muted={false} style={{ width: '100%', height: '100%' }} onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>*/}
-              {/*      <source src={video1} type="video/mp4" />*/}
+              {/*    <video controls autoPlay loop muted={false} style={{width: '100%', height: '100%'}}*/}
+              {/*           onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>*/}
+              {/*      <source src={articleData?.videoPath} type="video/mp4"/>*/}
               {/*      Your browser does not support the video tag.*/}
               {/*    </video>*/}
               {/*  ) : (*/}
-              {/*    <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image" />*/}
+              {/*    <>*/}
+              {/*      <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>*/}
+              {/*      <StyledButton>Create Video</StyledButton>*/}
+              {/*    </>*/}
               {/*  )}*/}
               {/*</ArticleImgWrapper>*/}
               <ArticleImgWrapper>
                 {articleData?.videoPath && !videoLoadingError ? (
-                  <video controls autoPlay loop muted={false} style={{ width: '100%', height: '100%' }} onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>
-                    <source src={articleData?.videoPath} type="video/mp4" />
+                  <video controls autoPlay loop muted={false} style={{width: '100%', height: '100%'}}
+                         onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>
+                    <source src={videoURI} type="video/mp4"/>
                     Your browser does not support the video tag.
                   </video>
                 ) : (
-                  <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image" />
+                  <>
+                    <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>
+                    <StyledButton onClick={handleCreateVideo}>Create Video</StyledButton>
+                  </>
                 )}
               </ArticleImgWrapper>
             </ArticleHeader>
+
             <ArticleContent>
               {articleData?.content && articleData.content.split('\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
