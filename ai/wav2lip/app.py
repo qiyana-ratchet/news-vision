@@ -268,10 +268,14 @@ def test():
 
         command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/result.avi', args.outfile)
         subprocess.call(command, shell=platform.system() != 'Windows')
-    
-    main()
 
-    return '/workspace/app/video/' + title + '.mp4'
+        outfile_h264 = '/workspace/video/' + title + 'h264.mp4'
+        command = 'ffmpeg -y -i {} -vcodec h264 -acodec copy {}'.format(args.outfile, outfile_h264)
+        subprocess.call(command, shell=platform.system() != 'Windows')
+
+
+    main()
+    return '/workspace/app/video/' + title + 'h264.mp4'
     
 
 if __name__=='__main__':
