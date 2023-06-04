@@ -37,6 +37,8 @@ import video2 from "../../assets/videos/iu.mp4";
 // import video3 from "/app/video/배우_김수로,_영국_축구팀_첼시_로버스_FC_구단주_사임.mp4";
 // // @ts-ignore
 // import video4 from "../../../app/video/배우_김수로,_영국_축구팀_첼시_로버스_FC_구단주_사임.mp4";
+// @ts-ignore
+import video5 from "../../assets/videos/1064회_로또_1등_19명당첨금_각_13억5천만원.mp4";
 
 
 interface ArticleData {
@@ -103,24 +105,48 @@ const Article = () => {
   //     });
   // };
 
+  // const handleCreateVideo = async () => {
+  //   fetch(`/news/video/${articleData?.id}`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch video');
+  //       }
+  //       return response.blob();
+  //     })
+  //     .then(blobData => {
+  //       // 영상 데이터를 처리하는 로직 작성
+  //       console.log('Video data:', blobData);
+  //       setVideoURI(URL.createObjectURL(blobData));
+  //       console.log(videoURI)
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching video:', error);
+  //     });
+  // };
   const handleCreateVideo = async () => {
-    fetch(`/news/video/${articleData?.id}`)
+    console.log('Fetching video...');
+    fetch(`/news/video/${articleData?.id}`, { mode: 'cors' })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch video');
         }
+        console.log('Video response:', response);
+        console.log('CORS headers:', response.headers.get('Access-Control-Allow-Origin'));
         return response.blob();
       })
       .then(blobData => {
-        // 영상 데이터를 처리하는 로직 작성
-        console.log('Video data:', blobData);
-        setVideoURI(URL.createObjectURL(blobData));
-        console.log(videoURI)
+        console.log('Video blob data:', blobData);
+        const blobURL = URL.createObjectURL(blobData);
+        console.log('Blob URL:', blobURL);
+        setVideoURI(blobURL);
+        console.log('Video URL set:', videoURI);
       })
       .catch(error => {
         console.error('Error fetching video:', error);
       });
   };
+
+  console.log('Browser compatibility:', !!document.createElement('video').canPlayType);
 
   return (
     <>
@@ -155,8 +181,8 @@ const Article = () => {
                 {videoURI && !videoLoadingError ? (
                   <video controls autoPlay loop muted={true} style={{width: '100%', height: '100%'}}
                          onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>
-                    {/*<source src={require(videoURI)} type="video/mp4"/>*/}
                     <source src={videoURI} type="video/mp4"/>
+                    {/*<source src={video5} type="video/mp4"/>*/}
                     Your browser does not support the video tag.
                   </video>
                 ) : (
