@@ -12,9 +12,9 @@ public class ArticleTextProcessor {
         if(origin == null) throw new IllegalArgumentException("no origin");
 
         String result;
-        result = origin.replaceAll("\\(.*\\)", "")
-                .replaceAll("\\[.*\\]", "")
-                .replaceAll("\\{.*\\}", "")
+        result = origin.replaceAll("\\(.*?\\)", "")
+                .replaceAll("\\[.*?\\]", "")
+                .replaceAll("\\{.*?\\}", "")
                 .replaceAll("%", "퍼센트")
                 .replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9,.!? ]", "")
                 .replaceAll("\\b([a-zA-Z]*\\.[a-zA-Z]+)\\b", "");
