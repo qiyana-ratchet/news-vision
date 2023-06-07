@@ -20,6 +20,7 @@ def test():
     data = request.get_json()
     audio_path = data['audio_path']
     title = data['title']
+    genre = data['genre']
 
     if audio_path is None:
         return "Error: 'audio_path' key is missing in the JSON data."
@@ -28,7 +29,7 @@ def test():
 
     args = argparse.Namespace()
     args.checkpoint_path = '/workspace/checkpoints/wav2lip.pth'
-    args.face = '1.mp4'
+    args.face = '1.mp4' if (genre == 'POLITICS' or genre == 'ECONOMY' or genre == 'SCIENCE') else '2.mp4'
     args.audio = audio_path
     args.outfile = '/workspace/video/' + title + '.mp4'
     
@@ -267,10 +268,14 @@ def test():
 
         command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(args.audio, 'temp/result.avi', args.outfile)
         subprocess.call(command, shell=platform.system() != 'Windows')
-    
-    main()
 
-    return args.outfile
+        outfile_h264 = '/workspace/video/' + title + 'h264.mp4'
+        command = 'ffmpeg -y -i {} -vcodec h264 -acodec copy {}'.format(args.outfile, outfile_h264)
+        subprocess.call(command, shell=platform.system() != 'Windows')
+
+
+    main()
+    return '/workspace/app/video/' + title + 'h264.mp4'
     
 
 if __name__=='__main__':
