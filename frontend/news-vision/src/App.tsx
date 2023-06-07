@@ -10,7 +10,7 @@ const App = () => {
       <GlobalStyle/>
       <Router>
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/" element={<Home/>}/> 
           <Route path="/article" element={<Article/>}/>
         </Routes>
       </Router>
