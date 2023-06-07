@@ -40,8 +40,7 @@ services:
       - public
     depends_on:
       - backend
-    volumes:
-      - shared_data:/app/video
+
 
     stdin_open: true
 
