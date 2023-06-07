@@ -276,7 +276,10 @@ def test():
 
     main()
     return '/workspace/app/video/' + title + 'h264.mp4'
-    
+
+@app.get('/wav2lip/health')
+def health():
+    return 'ok';
 
 if __name__=='__main__':
     app.run()

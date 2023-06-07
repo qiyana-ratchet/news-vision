@@ -16,7 +16,7 @@ public class VideoProcessor {
         if(articleDTO == null) throw new IllegalArgumentException("no articleDTO");
 
         articleTextProcessor.articleTitleProcess(articleDTO);
-        WebClient webClient = WebClient.builder().baseUrl("http://nginx").build();
+        WebClient webClient = WebClient.builder().baseUrl("http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com").build();
 
         return webClient.post()
                 .uri("/tts")

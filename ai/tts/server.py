@@ -26,7 +26,10 @@ def test():
 
     mels, alignment_history, audios = do_synthesis(input_text, tacotron2, mb_melgan, "TACOTRON", "MB-MELGAN")
 
-    sf.write(audio_path, audios, 22050)
+    try:
+        sf.write(audio_path, audios, 22050)
+    except Exception as e:
+        print(f"An error occurred while writing the audio file: {str(e)}")
     
 
     # with open(file_path,'w') as file:
@@ -36,10 +39,27 @@ def test():
     
     
     json_data = {'audio_path': voice_path,'title': title, 'genre': genre}
-    res = requests.post('http://nginx/wav2lip', json=json_data)
 
-    return res.text
+    try:
+        res = requests.post('http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/wav2lip', json=json_data)
+        res.raise_for_status()  # 요청이 실패한 경우 예외 발생
+        return res.text
+    except requests.exceptions.RequestException as e:
+        error_msg = "요청을 보낼 수 없습니다: {}".format(e)
+    except requests.exceptions.HTTPError as e:
+        error_msg = "HTTP 오류가 발생하였습니다: {}".format(e)
+    except requests.exceptions.ConnectionError as e:
+        error_msg = "서버에 연결할 수 없습니다: {}".format(e)
+    except Exception as e:
+        error_msg = "예외가 발생하였습니다: {}".format(e)
 
+    print(error_msg)
+    return error_msg
+
+
+@app.get('/tts/health')
+def health():
+    return 'ok';
 
 
 if __name__=='__main__':

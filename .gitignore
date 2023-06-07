@@ -34,4 +34,7 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
+.vscode
+
+######## DS_store####
+.DS_Store

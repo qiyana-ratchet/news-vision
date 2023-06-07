@@ -64,8 +64,8 @@ const Article = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          // `http://localhost:8080/news/article?id=${location.state?.newsId}`
-          `/news/article?id=${location.state?.newsId}`
+          `http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/news/article?id=${location.state?.newsId}`
+          // `/news/article?id=${location.state?.newsId}`
         );
         const data: ArticleData = await response.json();
         setArticleData(data);
@@ -125,7 +125,7 @@ const Article = () => {
   // };
   const handleCreateVideo = async () => {
     console.log('Fetching video...');
-    fetch(`/news/video/${articleData?.id}`, { mode: 'cors' })
+    fetch(`http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/news/video/${articleData?.id}`, { mode: 'cors' })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch video');
