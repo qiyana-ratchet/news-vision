@@ -15,7 +15,6 @@ def test():
     title = data['p_title']
     context = data['p_content']
     genre = data['genre']
-    context = "감자 고구마"
 
     #volume에 저장할 file_path생성
     audio_path = '/workspace/voice/' + title +'.mp3'
