@@ -5,10 +5,12 @@ COPY gradle gradle
 COPY build.gradle.kts settings.gradle.kts gradlew ./
 COPY src src
 
+RUN dos2unix gradlew #DOS(윈도우) 텍스트 파일 포맷을, 리눅스 포맷으로 변경하는 리눅스 명령어 (ex. 개행문자 등)
 RUN chmod +x gradlew
 
 RUN ./gradlew bootJar
 RUN mkdir -p build/libs/dependency && (cd build/libs/dependency; jar -xf ../*.jar)
+RUN mkdir /workspace/app/video
 
 FROM openjdk:17-alpine
 VOLUME /tmp
