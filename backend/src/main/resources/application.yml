@@ -7,9 +7,7 @@ spring:
          url: ${SPRING_DATASOURCE_URL}
          username: ${SPRING_DATASOURCE_USERNAME}
          password: ${SPRING_DATASOURCE_PASSWORD}
-#         url: jdbc:mysql://newsvision-4.cadlryevxwwf.ap-northeast-2.rds.amazonaws.com:3306/newsvision
-#         username: jinseok
-#         password: liverpool12!
+
     jpa:
         hibernate:
           ddl-auto: create
