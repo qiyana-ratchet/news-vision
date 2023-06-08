@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 
 @app.post('/wav2lip')
-def test():
+def make_video():
     #json으로 audio_path를 받는다.
     data = request.get_json()
     audio_path = data['audio_path']
