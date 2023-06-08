@@ -66,7 +66,8 @@ const Home = () => {
     async function fetchNewsList() {
       try {
         // const response = await fetch('http://localhost:8080/news/list?page=0');
-        const response = await fetch('/news/list?page=0');
+        // const response = await fetch('/news/list?page=0');
+        const response = await fetch('http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/news/list?page=0');
         const data: NewsList = await response.json();
         setNewsList(data.content);
         console.log("Fetched Data from API")
