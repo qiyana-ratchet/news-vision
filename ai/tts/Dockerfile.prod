@@ -11,7 +11,6 @@ RUN mkdir /workspace/voice
 
 COPY requirements.txt /workspace
 RUN pip install -r requirements.txt
-
 COPY . /workspace
 
 ENV FLASK_APP server.py
