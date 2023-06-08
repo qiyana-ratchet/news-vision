@@ -22,12 +22,13 @@ import {
   GridDescSection,
   GridButtonTitle,
   GridSectionTitle,
-  GridTitleContainer, GridImgLeft,
+  GridTitleContainer, GridImgLeft, ResetButton,
 } from './styles';
 
 import vNews1 from '../../assets/images/image39.png';
 import vNews2 from '../../assets/images/image40.png';
-import vNews3 from '../../assets/images/image60.png';
+// import vNews3 from '../../assets/images/image60.png';
+import vNews3 from '../../assets/images/image69.png';
 import vNews4 from '../../assets/images/image61.png';
 import vNews5 from '../../assets/images/image62.png';
 import vNews6 from '../../assets/images/image63.png';
@@ -78,7 +79,26 @@ const Home = () => {
   }, []);
 
   function myFunction(newsId: number) {
-    navigate('/article', { state: { newsId } });
+    navigate('/article', {state: {newsId}});
+  }
+
+  const getNews = async () => {
+    console.log('getNews');
+    try {
+      const response = await fetch(
+        `news/api-test`
+      );
+      if (response.ok) {
+        // API request was successful
+        // Refresh the page
+        window.location.reload();
+      } else {
+        // Handle API request error
+        console.error('API request failed');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -97,7 +117,13 @@ const Home = () => {
       <Header/>
       <MainWrapper>
         <SectionWrapper>
-          <SectionTitle>Today's Virtual News</SectionTitle>
+          <div style={{
+            width: 1220, display: "flex",
+            justifyContent: "space-between"
+          }}>
+            <SectionTitle>Today's Virtual News</SectionTitle>
+            <ResetButton onClick={getNews}>Get Today's News</ResetButton>
+          </div>
           <BannerWrapper>
             <LeftHalf>
               <BigButton onClick={() => myFunction(newsList[0].id)}>

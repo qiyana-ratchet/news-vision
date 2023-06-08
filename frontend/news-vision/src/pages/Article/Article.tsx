@@ -58,6 +58,7 @@ const Article = () => {
   const [articleData, setArticleData] = useState<ArticleData | null>(null);
   const [videoLoadingError, setVideoLoadingError] = useState(false);
   const [videoURI, setVideoURI] = useState("");
+  const [videoCreating, setVideoCreating] = useState(false);
 
 
   useEffect(() => {
@@ -124,6 +125,7 @@ const Article = () => {
   //     });
   // };
   const handleCreateVideo = async () => {
+    setVideoCreating(true);
     console.log('Fetching video...');
     fetch(`/news/video/${articleData?.id}`, { mode: 'cors' })
       .then(response => {
@@ -177,6 +179,21 @@ const Article = () => {
               {/*    </>*/}
               {/*  )}*/}
               {/*</ArticleImgWrapper>*/}
+              {/*<ArticleImgWrapper>*/}
+              {/*  {videoURI && !videoLoadingError ? (*/}
+              {/*    <video controls autoPlay loop muted={true} style={{width: '100%', height: '100%'}}*/}
+              {/*           onCanPlay={() => console.log("Video can be played.")} onError={handleVideoError}>*/}
+              {/*      <source src={videoURI} type="video/mp4"/>*/}
+              {/*      /!*<source src={video5} type="video/mp4"/>*!/*/}
+              {/*      Your browser does not support the video tag.*/}
+              {/*    </video>*/}
+              {/*  ) : (*/}
+              {/*    <>*/}
+              {/*      <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>*/}
+              {/*      <StyledButton onClick={handleCreateVideo}>Show Video</StyledButton>*/}
+              {/*    </>*/}
+              {/*  )}*/}
+              {/*</ArticleImgWrapper>*/}
               <ArticleImgWrapper>
                 {videoURI && !videoLoadingError ? (
                   <video controls autoPlay loop muted={true} style={{width: '100%', height: '100%'}}
@@ -188,7 +205,9 @@ const Article = () => {
                 ) : (
                   <>
                     <ArticleImg src={articleData?.thumUrl ?? vNews3} alt="news image"/>
-                    <StyledButton onClick={handleCreateVideo}>Show Video</StyledButton>
+                    <StyledButton onClick={handleCreateVideo}>
+                      {videoCreating ? 'Creating Video...' : 'Show Video'}
+                    </StyledButton>
                   </>
                 )}
               </ArticleImgWrapper>

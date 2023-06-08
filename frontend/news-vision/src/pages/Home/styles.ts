@@ -25,6 +25,14 @@ export const SectionTitle = styled.span`
   color: #4A4A4A;
 `;
 
+export const ResetButton = styled.button`
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #4A4A4A;
+  justify-content: flex-end;
+`;
+
 export const BannerWrapper = styled.div`
   width: 1240px;
   height: 380px;

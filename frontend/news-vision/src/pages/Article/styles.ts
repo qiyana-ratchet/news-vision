@@ -22,13 +22,15 @@ export const ArticleHeader = styled.div`
 
 export const StyledButton = styled.button`
   font-family: 'Montserrat', sans-serif;
-  color: #6CAFFF;
+  //color: #6CAFFF;
+  color: black;
   font-size: 3rem;
   text-align: center;
   //center
   display: block;
   margin: 0 auto;
-  border: 2px solid #6CAFFF;
+  //border: 2px solid #6CAFFF;
+  border: 2px solid black;
   margin-bottom: 40px;
   
   &:hover {
