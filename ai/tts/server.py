@@ -32,7 +32,8 @@ def make_audio():
 
     #예외처리 이부분에서 에러 다수발생.
     try:
-        res = requests.post('http://nginx/wav2lip', json=json_data)
+        # res = requests.post('http://nginx/wav2lip', json=json_data)
+        res = requests.post('http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/wav2lip', json=json_data)
         res.raise_for_status()  # 요청이 실패한 경우 예외 발생
         return res.text
     except requests.exceptions.RequestException as e:
@@ -46,7 +47,11 @@ def make_audio():
 
     print(error_msg)
     return error_msg
-    
+
+#ecs-health-check
+@app.get('/tts/health')
+def health():
+    return 'ok';    
 
 if __name__=='__main__':
     app.run(threaded=True)
