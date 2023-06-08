@@ -36,7 +36,7 @@ public class ChatGpt {
         this.client = client;
     }
 
-    public ChatGpt(String apiKey, String apiHost, OkHttpClient clinet){
+    public ChatGpt(String apiKey, String apiHost, OkHttpClient client){
         this.apiKey=apiKey;
         this.apiHost=apiHost;
         this.client=client;
