@@ -80,7 +80,7 @@ const Home = () => {
   }, []);
 
   function myFunction(newsId: number) {
-    navigate('http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/article', {state: {newsId}});
+    navigate('/article', {state: {newsId}});
   }
 
   const getNews = async () => {
