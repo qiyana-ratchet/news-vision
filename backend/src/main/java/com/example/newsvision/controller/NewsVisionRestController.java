@@ -241,4 +241,12 @@ public class NewsVisionRestController {
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(articleDTOPage);
     }
+
+        /**
+     * health-check
+     */
+    @GetMapping("/health")
+    public String healthCheck(){
+        return "good";
+    }
 }
