@@ -9,7 +9,7 @@ import json
 app = Flask(__name__)
 
 @app.post('/tts')
-def test():
+def make_audio():
     #데이터를 json으로 받아온다.
     data = request.get_json()
     title = data['p_title']
