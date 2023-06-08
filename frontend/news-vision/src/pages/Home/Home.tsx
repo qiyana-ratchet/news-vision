@@ -80,14 +80,14 @@ const Home = () => {
   }, []);
 
   function myFunction(newsId: number) {
-    navigate('/article', {state: {newsId}});
+    navigate('http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/article', {state: {newsId}});
   }
 
   const getNews = async () => {
     console.log('getNews');
     try {
       const response = await fetch(
-        `news/api-test`
+        `http://news-alb-rest-1045794844.ap-northeast-2.elb.amazonaws.com/news/api-test`
       );
       if (response.ok) {
         // API request was successful
