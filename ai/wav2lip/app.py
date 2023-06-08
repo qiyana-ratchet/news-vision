@@ -30,12 +30,12 @@ def make_video():
     args = argparse.Namespace()
     args.checkpoint_path = '/workspace/checkpoints/wav2lip.pth'
     # args.face = '1.mp4' if (genre == 'POLITICS' or genre == 'ECONOMY' or genre == 'SCIENCE') else '2.mp4'
-    if genre=='CULTURE':
-        args.face='actor.mp4'
+    if genre=='POLITICS':
+        args.face='news.mp4'
     elif genre=='MISCELLANEOUS':
         args.face='iu.mp4'
     else:
-        args.face='news.mp4'
+        args.face='actor.mp4'
     args.audio = audio_path
     args.outfile = '/workspace/video/' + title + '.mp4'
     
