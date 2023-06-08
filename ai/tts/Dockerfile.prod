@@ -11,7 +11,6 @@ RUN mkdir /workspace/voice
 
 COPY requirements.txt /workspace
 RUN pip install -r requirements.txt
-
 COPY . /workspace
 
 ENV FLASK_APP server.py
@@ -19,5 +18,4 @@ ENV FLASK_ENV production
 ENV FLASK_RUN_PORT 8000
 ENV FLASK_RUN_HOST 0.0.0.0
 
-#CMD ["python","server.py"]
 CMD ["flask","run"]
